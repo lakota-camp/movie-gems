@@ -9,6 +9,8 @@ const {
   deleteMovie,
 } = require('../controllers/movie.controller.js');
 
+// * Movie CRUD API Routes * //
+
 // Create a movie
 router.post('/', createMovie);
 

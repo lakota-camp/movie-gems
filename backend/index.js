@@ -3,12 +3,11 @@ const cors = require('cors');
 const app = express();
 const mongoose = require('mongoose');
 const movieRoute = require('./routes/movie.route');
-const validateObjectId = require('./middleware/validateObjectId');
+const userRoute = require('./routes/user.route');
 require('dotenv').config();
 
-app.use(cors({}));
-
 // Middleware
+app.use(cors({}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -16,12 +15,19 @@ mongo_db_key = process.env.MONGO_DB_KEY;
 
 const PORT = 3000;
 
-// Routes
+// * Routes * //
+
+// Movie
 app.use('/api/movies', movieRoute);
 
+// User
+app.use('/api/user', userRoute);
+
 app.get('/', (req, res) => {
-  res.send(`Hello from the backend on port: ${PORT}`);
+  res.send(`Backend running on port: ${PORT}`);
 });
+
+// * Connect to DB * //
 
 mongoose
   .connect(

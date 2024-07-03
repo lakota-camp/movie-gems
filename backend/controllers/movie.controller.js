@@ -1,5 +1,7 @@
 const Movie = require('../models/movie.model');
 
+// * CRUD Movie * //
+
 // Create a movie
 const createMovie = async (req, res) => {
   try {
@@ -13,7 +15,8 @@ const createMovie = async (req, res) => {
 // Read all movies from user
 const getMovies = async (req, res) => {
   try {
-    const movies = await Movie.find({ userId: req.params.userId });
+    const userId = req.params.userId;
+    const movies = await Movie.findById({ userId });
     res.status(200).json(movies);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -55,9 +58,7 @@ const deleteMovie = async (req, res) => {
     }
     res.status(204).json(`Movie '${id}' deleted successfully.`);
   } catch (error) {
-    res
-      .status(500)
-      .send({ message: `Movie '${req.params.id}' deleted successfully.` });
+    res.status(500).json({ message: error.message });
   }
 };
 

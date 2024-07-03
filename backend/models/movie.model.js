@@ -1,24 +1,23 @@
 const mongoose = require('mongoose');
 
-// Movie Schema
+// * Movie DB Schema * //
 const MovieSchema = mongoose.Schema(
   {
     title: {
       type: String,
-      require: true,
+      required: true,
     },
     description: {
       type: String,
     },
     userId: {
-      type: String,
-      // mongoose.Schema.Types.ObjectId,
-      // ref: 'User',
-      require: true,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      required: true,
     },
     movieApiId: {
       type: String,
-      required: true,
+      // required: true,
     },
   },
   {
