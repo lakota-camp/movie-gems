@@ -16,7 +16,7 @@ const createMovie = async (req, res) => {
 const getMovies = async (req, res) => {
   try {
     const userId = req.params.userId;
-    const movies = await Movie.findById({ userId });
+    const movies = await Movie.findById({ userId }); // FIXME: {userId} or userId ?
     res.status(200).json(movies);
   } catch (error) {
     res.status(500).json({ message: error.message });
