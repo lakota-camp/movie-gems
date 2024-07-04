@@ -7,8 +7,16 @@ const MovieSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    genre: {
+      type: String,
+      required: true,
+    },
     description: {
       type: String,
+    },
+    releaseDate: {
+      type: Date,
+      required: true,
     },
     userId: {
       type: mongoose.Schema.Types.ObjectId,

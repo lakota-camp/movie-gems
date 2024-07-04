@@ -43,7 +43,7 @@ const updateMovie = async (req, res) => {
     if (!movie) {
       return res.status(404).json({ message: 'Movie not found' });
     }
-    res.status(200).json(updatedProduct);
+    res.status(200).json(movie);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
