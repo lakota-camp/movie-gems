@@ -16,7 +16,7 @@ const createMovie = async (req, res) => {
 const getMovies = async (req, res) => {
   try {
     const userId = req.params.userId;
-    const movies = await Movie.findById({ userId }); // FIXME: {userId} or userId ?
+    const movies = await Movie.find({ userId: userId });
     res.status(200).json(movies);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -52,11 +52,12 @@ const updateMovie = async (req, res) => {
 // Delete users movie
 const deleteMovie = async (req, res) => {
   try {
-    const movie = await Movie.findByIdAndDelete(req.params.id);
+    const id = req.params.id;
+    const movie = await Movie.findByIdAndDelete(id);
     if (!movie) {
       return res.status(404).json({ message: 'Movie not found' });
     }
-    res.status(204).json(`Movie '${id}' deleted successfully.`);
+    res.status(200).json(`Movie '${id}' deleted successfully.`);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

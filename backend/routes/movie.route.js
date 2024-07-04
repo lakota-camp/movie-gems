@@ -33,7 +33,11 @@ router.get('/', getAllMovies);
 // Read user movies
 router.get(
   '/:userId',
-  [param('id').isMongoId().withMessage('Movie ID must be a valid MongoDB ID')],
+  [
+    param('userId')
+      .isMongoId()
+      .withMessage('Movie ID must be a valid MongoDB ID'),
+  ],
   handleInputErrors,
   getMovies,
 );
