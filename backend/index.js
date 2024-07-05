@@ -1,19 +1,21 @@
+require('dotenv').config();
+
 const express = require('express');
 const cors = require('cors');
-const app = express();
 const mongoose = require('mongoose');
 const movieRoute = require('./routes/movie.route');
 const userRoute = require('./routes/user.route');
-require('dotenv').config();
+
+const app = express();
+const PORT = 3000;
 
 // Middleware
 app.use(cors({}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-mongo_db_key = process.env.MONGO_DB_KEY;
-
-const PORT = 3000;
+// MongoDB credentials
+const uri = process.env.MONGO_URI;
 
 // * Routes * //
 
@@ -30,9 +32,7 @@ app.get('/', (req, res) => {
 // * Connect to DB * //
 
 mongoose
-  .connect(
-    `mongodb+srv://lakotacamp3:${mongo_db_key}@movie-watchlist.njohish.mongodb.net/?retryWrites=true&w=majority&appName=movie-watchlist`,
-  )
+  .connect(uri)
   .then(() => {
     console.log('Successfully connected to database.');
     app.listen(PORT, () => {
