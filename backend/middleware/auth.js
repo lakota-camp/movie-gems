@@ -18,4 +18,41 @@ const createJWT = (user) => {
   return token;
 };
 
-// * Middleware to protect routes
+// * Middleware to protect routes * //
+
+const protect = (req, res, next) => {
+  const bearer = req.headers.authorization;
+
+  // check if header exists
+  if (!bearer) {
+    res.status(404);
+    res.json({ message: 'Not authorized' });
+    return;
+  }
+
+  // check if token exists
+  const [, token] = bearer.split(' ');
+  if (!token) {
+    res.status(404);
+    res.json({ message: 'Invalid token' });
+    return;
+  }
+
+  try {
+    const user = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = user;
+    next();
+  } catch (error) {
+    console.error(error);
+    res.status(401);
+    res.json({ message: 'Invalid token' });
+    return;
+  }
+};
+
+module.exports = {
+  comparePasswords,
+  hashPassword,
+  createJWT,
+  protect,
+};

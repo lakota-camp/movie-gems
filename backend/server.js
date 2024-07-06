@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const connectDB = require('./config/db');
 const movieRoute = require('./routes/movie.route');
 const userRoute = require('./routes/user.route');
+const { protect } = require('./middleware/auth');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -19,11 +20,10 @@ app.use(express.urlencoded({ extended: true }));
 const uri = process.env.MONGO_URI;
 
 // * Routes * //
+// Movie (protected route)
+app.use('/api/movies', protect, movieRoute);
 
-// Movie
-app.use('/api/movies', movieRoute);
-
-// User
+// User (public route)
 app.use('/api/user', userRoute);
 
 app.get('/', (req, res) => {
