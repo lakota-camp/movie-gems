@@ -3,11 +3,12 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const connectDB = require('./config/db');
 const movieRoute = require('./routes/movie.route');
 const userRoute = require('./routes/user.route');
 
 const app = express();
-const PORT = 3000;
+const port = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors({}));
@@ -26,17 +27,13 @@ app.use('/api/movies', movieRoute);
 app.use('/api/user', userRoute);
 
 app.get('/', (req, res) => {
-  res.send(`Backend running on port: ${PORT}`);
+  res.send(`Backend running on port: ${port}`);
 });
 
 // * Connect to DB * //
 
-mongoose
-  .connect(uri)
-  .then(() => {
-    console.log('Successfully connected to database.');
-    app.listen(PORT, () => {
-      console.log(`Server is running on http://localhost:${PORT}`);
-    });
-  })
-  .catch(() => console.log('Connection Failed.'));
+connectDB();
+
+app.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}`);
+});
