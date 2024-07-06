@@ -1,37 +1,22 @@
 const Movie = require('../models/movie.model');
 
-// * CRUD Movie * //
+// * Admin Only: Movie CRUD Operations * //
 
-// Create a movie for logged in user
+// Create a movie
 const createMovie = async (req, res) => {
   try {
-    const movie = await Movie.create({ ...req.body, userId: req.user.id });
-    const saveMovie = await movie.save();
-    res.status(201).json(saveMovie);
+    const movie = await Movie.create(req.body);
+    res.status(201).json(movie);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-// Read all movies from user
-const getUserMovies = async (req, res) => {
+// Read all movies from database
+const getAllMovies = async (req, res) => {
   try {
-    const userId = req.params.userId;
-    const movies = await Movie.find({ userId: userId });
+    const movies = await Movie.find({});
     res.status(200).json(movies);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
-
-// Get specific movie by ID for logged in user
-const getMovieById = async (req, res) => {
-  try {
-    const movie = Movie.findOne({ _id: req.params.id, userId: req.user.id });
-    if (!movie) {
-      return res.status(404).json({ message: 'Movie not found' });
-      res.status(200).json(movie);
-    }
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -56,13 +41,12 @@ const updateMovie = async (req, res) => {
 // Delete users movie
 const deleteMovie = async (req, res) => {
   try {
-    const _id = req.params.id;
-    const userId = req.user.id;
-    const movie = await Movie.findByIdAndDelete({ _id, userId });
+    const id = req.params.id;
+    const movie = await Movie.findByIdAndDelete(id);
     if (!movie) {
       return res.status(404).json({ message: 'Movie not found' });
     }
-    res.status(200).json(`Movie '${_id}' deleted successfully.`);
+    res.status(200).json(`Movie '${id}' deleted successfully.`);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -70,8 +54,7 @@ const deleteMovie = async (req, res) => {
 
 module.exports = {
   createMovie,
-  getUserMovies,
-  getMovieById,
+  getAllMovies,
   updateMovie,
   deleteMovie,
 };

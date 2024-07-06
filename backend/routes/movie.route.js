@@ -5,15 +5,15 @@ const handleInputErrors = require('../middleware/InputError');
 
 const {
   createMovie,
-  getMovies,
-  getAllMovies,
+  getUserMovies,
+  getMovieById,
   updateMovie,
   deleteMovie,
 } = require('../controllers/movie.controller.js');
 
 // * Movie CRUD API Routes * //
 
-// Create a movie
+// Create a movie for logged in user
 router.post(
   '/',
   [
@@ -27,22 +27,17 @@ router.post(
   createMovie,
 );
 
-// Read all movies
-router.get('/', getAllMovies);
+// Read all movies for the logged-in user
+router.get('/', getUserMovies);
 
-// Read user movies
+// Read a specific movie by ID for logged in user
 router.get(
-  '/:userId',
-  [
-    param('userId')
-      .isMongoId()
-      .withMessage('Movie ID must be a valid MongoDB ID'),
-  ],
-  handleInputErrors,
-  getMovies,
+  '/:id',
+  [param('id').isMongoId().withMessage('Movie ID must be a valid MongoDB ID')],
+  getMovieById,
 );
 
-// Update a movie
+// Update a movie for logged in user
 router.put(
   '/:id',
   [
@@ -52,8 +47,8 @@ router.put(
     body('releaseDate')
       .notEmpty()
       .withMessage('Release date must be a valid date.'),
-    handleInputErrors,
   ],
+  handleInputErrors,
   updateMovie,
 );
 

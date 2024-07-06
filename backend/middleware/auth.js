@@ -6,7 +6,7 @@ const comparePasswords = (pass, hash) => {
 };
 // takes in plain text password and returns hashed password; 5 is a salt: a value that gives hash variety (more security)
 const hashPassword = (pass) => {
-  return bcrypt.hash(pass, 5);
+  return bcrypt.hash(pass, 10);
 };
 
 // JSON web token
@@ -25,7 +25,7 @@ const protect = (req, res, next) => {
 
   // check if header exists
   if (!bearer) {
-    res.status(404);
+    res.status(401);
     res.json({ message: 'Not authorized' });
     return;
   }
