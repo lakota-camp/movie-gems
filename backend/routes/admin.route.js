@@ -3,11 +3,16 @@ const router = express.Router();
 const { body, param } = require('express-validator');
 const handleInputErrors = require('../middleware/InputError');
 const {
+  // Movies
   createMovie,
   getAllMovies,
   updateMovie,
   deleteMovie,
-} = require('../controllers/adminMovie.controller.js');
+  // Users
+  getAllUsers,
+  updateUser,
+  deleteUser,
+} = require('../controllers/admin.controller.js');
 
 // * Admin movie routes * //
 
@@ -27,18 +32,6 @@ router.post(
 // Read all movies
 router.get('/movies', getAllMovies);
 
-// Read all movies for specific user
-router.get(
-  '/:userId',
-  [
-    param('userId')
-      .isMongoId()
-      .withMessage('Movie ID must be a valid MongoDB ID'),
-  ],
-  handleInputErrors,
-  getAllMovies,
-);
-
 // Update a movie
 router.put('/movies', updateMovie);
 
@@ -46,16 +39,35 @@ router.put('/movies', updateMovie);
 router.delete('/movies', deleteMovie);
 
 // * Admin user routes * //
-// Read all users
 
-// Read a user by user Id
-router.get(
-  '/:userId',
+// Read all users
+router.get('/users', getAllUsers);
+
+// Update a user
+router.put(
+  '/users/:id',
   [
-    param('userId')
-      .isMongoId()
-      .withMessage('Movie ID must be a valid MongoDB ID'),
+    param('id').isMongoId().withMessage('User ID must be a valid MongoDB ID'),
+    body('username').optional(),
+    body('email')
+      .optional()
+      .isEmail()
+      .withMessage('Must be a valid email address'),
+    body('password')
+      .optional()
+      .isLength({ min: 9 })
+      .withMessage('Password must be at least 9 characters long'),
   ],
   handleInputErrors,
-  getAllMovies,
+  updateUser,
 );
+
+// Delete user
+router.delete(
+  'users/:id',
+  [param('id').isMongoId().withMessage('User ID must be a valid MongoDB ID')],
+  handleInputErrors,
+  deleteUser,
+);
+
+module.exports = router;

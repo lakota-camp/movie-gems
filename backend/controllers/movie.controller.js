@@ -55,13 +55,18 @@ const updateMovie = async (req, res) => {
 
 // Delete users movie
 const deleteMovie = async (req, res) => {
+  console.log(req.params);
   try {
     const _id = req.params.id;
     const userId = req.user.id;
-    const movie = await Movie.findByIdAndDelete({ _id, userId });
+    // Check ownership of movie
+    const movie = await Movie.findOne({ _id, userId });
+    // Check if movies exists
     if (!movie) {
       return res.status(404).json({ message: 'Movie not found' });
     }
+    // Delete movie if it exists
+    await Movie.findByIdAndUpdate(_id);
     res.status(200).json(`Movie '${_id}' deleted successfully.`);
   } catch (error) {
     res.status(500).json({ message: error.message });
