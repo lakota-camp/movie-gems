@@ -19,7 +19,7 @@ const createUser = async (req, res) => {
     }
 
     // Hash password
-    const hash = await hashPassword(req.body.password);
+    const hash = await hashPassword(password);
 
     // Create new user
     const user = await User.create({

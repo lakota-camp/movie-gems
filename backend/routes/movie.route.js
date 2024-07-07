@@ -28,7 +28,7 @@ router.post(
 );
 
 // Read all movies for the logged-in user
-router.get('/', getUserMovies);
+router.get('/:userId', getUserMovies);
 
 // Read a specific movie by ID for logged in user
 router.get(
