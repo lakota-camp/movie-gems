@@ -28,7 +28,7 @@ app.use('/api/movies', movieRoute);
 // User (public route)
 app.use('/api/user', userRoute);
 
-// Admin routes
+// Admin routes (protected route)
 app.use('/api/admin', adminRoute);
 
 app.get('/', (req, res) => {

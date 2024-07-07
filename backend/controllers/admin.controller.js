@@ -115,6 +115,7 @@ module.exports = {
   deleteMovie,
   // Users
   getAllUsers,
+  getUser,
   updateUser,
   deleteUser,
 };

@@ -33,10 +33,10 @@ router.post(
 router.get('/movies', getAllMovies);
 
 // Update a movie
-router.put('/movies', updateMovie);
+router.put('/movies/:id', updateMovie);
 
 // Delete a movie
-router.delete('/movies', deleteMovie);
+router.delete('/movies/:id', deleteMovie);
 
 // * Admin user routes * //
 
