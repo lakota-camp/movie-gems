@@ -58,7 +58,7 @@ router.get('/', getAllMovies);
 // Get movie by Id
 router.get('/:id', getMovieById);
 
-// Update a movie for logged in user
+// Update a movie
 router.put(
   '/:id',
   [
