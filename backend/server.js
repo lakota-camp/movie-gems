@@ -1,15 +1,19 @@
 require('dotenv').config();
-
 const express = require('express');
-const cors = require('cors');
-const mongoose = require('mongoose');
+// DB
 const connectDB = require('./config/db');
+// Routes
 const movieRoute = require('./routes/movie.route');
+// Middleware
 const { protect } = require('./middleware/auth');
 const { requestLogger, ipLogger } = require('./middleware/requestLog');
+const cors = require('cors');
 
 const app = express();
+
+// Env variables
 const port = process.env.PORT || 3000;
+const host = process.env.DB_HOST;
 
 // Middleware
 app.use(cors({}));
@@ -28,11 +32,11 @@ app.get('/', (req, res) => {
 });
 
 // * Connect to DB * //
-
 connectDB();
 
+// Run Server
 app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+  console.log(`Server is running on http://${host}:${port}`);
 });
 
 // ____________________________________________________________
