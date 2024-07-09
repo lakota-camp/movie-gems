@@ -31,23 +31,41 @@ const MovieSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    year: {
+      type: String,
+      required: false,
+    },
+    runtime: {
+      type: String,
+      required: false,
+    },
     genre: {
       type: String,
-      required: true,
-      enum: genresCategories,
+      required: false,
+    },
+    director: {
+      type: String,
+      required: false,
+    },
+    actors: {
+      type: String,
+      required: false,
     },
     description: {
       type: String,
+      required: false,
     },
-    releaseDate: {
-      type: Date,
-      required: true,
+    poster: {
+      type: String,
+      required: false,
     },
-    userId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
-      required: true,
-    },
+    // Future Update: users have their own movie lists
+    // ,
+    // userId: {
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   ref: 'User',
+    //   required: true,
+    // }
     movieApiId: {
       type: String,
       // required: true,

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { body, param } = require('express-validator');
-const handleInputErrors = require('../middleware/InputError');
+const handleInputErrors = require('../../middleware/InputError.js');
 const {
   // Movies
   createMovie,
@@ -12,7 +12,7 @@ const {
   getAllUsers,
   updateUser,
   deleteUser,
-} = require('../controllers/admin.controller.js');
+} = require('../../controllers/future-updates/admin.controller.js');
 
 // * Admin movie routes * //
 

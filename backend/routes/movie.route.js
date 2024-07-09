@@ -5,48 +5,84 @@ const handleInputErrors = require('../middleware/InputError');
 
 const {
   createMovie,
-  getUserMovies,
+  getAllMovies,
   getMovieById,
   updateMovie,
   deleteMovie,
+  searchMovies,
 } = require('../controllers/movie.controller.js');
+
+// Search for movie
+router.get('/search', searchMovies);
 
 // * Movie CRUD API Routes * //
 
-// Create a movie for logged in user
+// Create a movie
 router.post(
   '/',
   [
-    body('title').notEmpty().withMessage('Title is required.'),
-    body('genre').notEmpty().withMessage('Genre is required.'),
-    body('releaseDate')
+    body('title')
       .notEmpty()
-      .withMessage('Release date must be a valid date.'),
+      .isString()
+      .withMessage('Title is required and must be a string.'),
+    body('runtime')
+      .optional()
+      .isString()
+      .withMessage('Runtime must be a string.'),
+    body('genre').optional().isString().withMessage('Genre must be a string.'),
+    body('year').optional().isString().withMessage('Year must be a string.'),
+    body('director')
+      .optional()
+      .isString()
+      .withMessage('Director must be a string.'),
+    body('actors')
+      .optional()
+      .isString()
+      .withMessage('Actors must be a string.'),
+    body('description')
+      .optional()
+      .isString()
+      .withMessage('Description must be a string.'),
+    body('poster')
+      .optional()
+      .isString()
+      .withMessage('Poster must be a string.'),
   ],
   handleInputErrors,
   createMovie,
 );
 
-// Read all movies for the logged-in user
-router.get('/:userId', getUserMovies);
+// Read all movies
+router.get('/', getAllMovies);
 
-// Read a specific movie by ID for logged in user
-router.get(
-  '/:id',
-  [param('id').isMongoId().withMessage('Movie ID must be a valid MongoDB ID')],
-  getMovieById,
-);
+// Get movie by Id
+router.get('/:id', getMovieById);
 
 // Update a movie for logged in user
 router.put(
   '/:id',
   [
     param('id').isMongoId().withMessage('Movie ID must be a valid MongoDB ID'),
-    body('title').notEmpty().withMessage('Title is required.'),
-    body('genre').notEmpty().withMessage('Genre is required.'),
-    body('releaseDate')
-      .notEmpty()
-      .withMessage('Release date must be a valid date.'),
+    body('title').optional().isString().withMessage('Title must be a string.'),
+    body('runtime').optional().isString().withMessage('Year must be a string.'),
+    body('genre').optional().isString().withMessage('Genre must be a string.'),
+    body('year').optional().isString().withMessage('Year must be a string.'),
+    body('director')
+      .optional()
+      .isString()
+      .withMessage('Director must be a string.'),
+    body('actors')
+      .optional()
+      .isString()
+      .withMessage('Actors must be a string.'),
+    body('description')
+      .optional()
+      .isString()
+      .withMessage('Description must be a string.'),
+    body('poster')
+      .optional()
+      .isString()
+      .withMessage('Poster must be a string.'),
   ],
   handleInputErrors,
   updateMovie,

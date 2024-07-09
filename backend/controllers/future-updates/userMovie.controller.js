@@ -1,19 +1,23 @@
-require('dotenv').config();
+// * Future update: allow logged in user to mange their own movie watch list * //
 
-const Movie = require('../models/movie.model');
+require('dotenv').config();
+const Movie = require('../../models/movie.model');
 const axios = require('axios');
 // Cache api calls
 const NodeCache = require('node-cache');
+// Cache for 24 hours
 const myCache = new NodeCache({ stdTTL: 86400 });
 
 const apiKey = process.env.OMDB_API_KEY;
 
 // * CRUD Movie * //
 
-// Create a movie
+// Create a movie for logged in user
 const createMovie = async (req, res) => {
   try {
-    const movie = await Movie.create({ ...req.body });
+    userId = req.params.UserId;
+
+    const movie = await Movie.create({ ...req.body, userId });
     const saveMovie = await movie.save();
     res.status(201).json(saveMovie);
   } catch (error) {
@@ -21,22 +25,21 @@ const createMovie = async (req, res) => {
   }
 };
 
-// Read all movies
-const getAllMovies = async (req, res) => {
+// Read all movies from user
+const getUserMovies = async (req, res) => {
   try {
     // const userId = req.params.userId;
-    const movies = await Movie.find({});
+    const movies = await Movie.find({ userId: userId });
     res.status(200).json(movies);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-// Get specific movie by ID
+// Get specific movie by ID for logged in user
 const getMovieById = async (req, res) => {
   try {
-    const id = req.params.id;
-    const movie = Movie.findOne({ id });
+    const movie = Movie.findOne({ _id: req.params.id, userId: req.user.id });
     if (!movie) {
       return res.status(404).json({ message: 'Movie not found' });
       res.status(200).json(movie);
@@ -62,23 +65,22 @@ const updateMovie = async (req, res) => {
   }
 };
 
-// Delete  movie
+// Delete users movie
 const deleteMovie = async (req, res) => {
   console.log(req.params);
   try {
-    const { id } = req.params;
-
-    const movie = await Movie.findById(id);
-
+    const _id = req.params.id;
+    const userId = req.user.id;
+    // Check ownership of movie
+    const movie = await Movie.findOne({ _id, userId });
     // Check if movies exists
     if (!movie) {
       return res.status(404).json({ message: 'Movie not found' });
     }
     // Delete movie if it exists
-    await Movie.findByIdAndDelete(id);
-    res.status(200).json(`Movie '${id}' deleted successfully.`);
+    await Movie.findByIdAndUpdate(_id);
+    res.status(200).json(`Movie '${_id}' deleted successfully.`);
   } catch (error) {
-    console.error('Error deleting:', error.message);
     res.status(500).json({ message: error.message });
   }
 };
@@ -87,7 +89,7 @@ const deleteMovie = async (req, res) => {
 const searchMovies = async (req, res) => {
   // Destructure title from query parameter
   const { title } = req.query;
-
+  console.log(title);
   // Check to see if title exists in query parameter
   if (!title) {
     return res
@@ -118,6 +120,7 @@ const searchMovies = async (req, res) => {
         description: movie.Plot,
         poster: movie.Poster,
       });
+      console.log(addMovie);
       // Cache the results
       myCache.set(title, movie);
       //   console.log(movie);
@@ -133,7 +136,7 @@ const searchMovies = async (req, res) => {
 
 module.exports = {
   createMovie,
-  getAllMovies,
+  getUserMovies,
   getMovieById,
   updateMovie,
   deleteMovie,

@@ -1,5 +1,5 @@
-const Movie = require('../models/movie.model');
-const User = require('../models/user.model');
+const Movie = require('../../models/movie.model');
+const User = require('../../models/user.model');
 
 // * Admin Only: Movie CRUD Operations * //
 
