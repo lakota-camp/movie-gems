@@ -7,6 +7,8 @@ const myCache = new NodeCache({ stdTTL: 86400 });
 
 const apiKey = process.env.OMDB_API_KEY;
 
+// FIXME: Organize, clean up, and add proper logging - Double check searchMovie function
+
 // * Movie Service Class *//
 class MovieService {
   async createMovie(movieData) {
@@ -22,6 +24,8 @@ class MovieService {
     return await Movie.findById(id);
   }
 
+  // FIXME: change update to only allow user to be able to update boolean for is watched attribute
+
   async updateMovie(id, data) {
     return await Movie.findByIdAndUpdate(id, data, {
       new: true,
@@ -34,17 +38,19 @@ class MovieService {
 
   async searchMovies(title) {
     let cachedMovie = myCache.get(title);
+
     if (!cachedMovie) {
       const response = await axios.get(
-        `http://www.omdbapi.com/?apikey=${apiKey}&t=${title}`,
+        `http://www.omdbapi.com/?apikey=${apiKey}&t=${title}&type=series`,
       );
 
       // Response from API
       const movie = response.data;
 
-      if (!response || !response.data || movie.response === 'False') {
-        return res.status(404).json({ error: 'Movie not found.' });
+      if (movie.Response === 'False') {
+        throw new Error('Movie not found.');
       }
+
       // If movie found in from API -> Add movie to DB
       const addMovie = new Movie({
         title: movie.Title,

@@ -1,5 +1,7 @@
 const movieService = require('../services/movieService');
 
+// FIXME: Refactor code to be more DRY - extract common async res.status(200) and res.status(500) functionality
+
 // * CRUD Movie * //
 
 // Create a movie
@@ -37,6 +39,8 @@ const getMovieById = async (req, res) => {
   }
 };
 
+// FIXME: change update to only allow user to be able to update boolean for is watched attribute
+
 // Update a movie
 const updateMovie = async (req, res) => {
   try {
@@ -51,7 +55,7 @@ const updateMovie = async (req, res) => {
   }
 };
 
-// Delete  movie
+// Delete movie
 const deleteMovie = async (req, res) => {
   try {
     const movie = await movieService.getMovieById(req.params.id);

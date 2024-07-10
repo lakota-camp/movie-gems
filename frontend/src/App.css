@@ -1,0 +1,20 @@
+.container {
+  margin-left: 35rem;
+  margin-right: 35rem;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  /* border: solid red; */
+}
+
+h1,
+h2,
+p {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 1rem;
+  padding: 1rem 1rem;
+  font-size: 3rem;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}

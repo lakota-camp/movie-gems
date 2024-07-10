@@ -1,0 +1,35 @@
+{
+  "name": "frontend",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Front End Application for Fullstack Movie Watch List App",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint \"src/**/*.{js,jsx}\" --quiet",
+    "preview": "vite preview"
+  },
+  "keywords": [],
+  "author": "Lakota Camp",
+  "license": "ISC",
+  "dependencies": {
+    "@tanstack/react-query": "^4.36.1",
+    "axios": "^1.7.2",
+    "dotenv": "^16.4.5",
+    "prettier": "^3.3.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.24.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react-swc": "^3.5.0",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react": "^7.34.2",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-react-refresh": "^0.4.7",
+    "vite": "^5.3.1"
+  }
+}

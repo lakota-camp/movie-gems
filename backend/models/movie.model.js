@@ -24,6 +24,8 @@ const genresCategories = [
   'Sport',
 ];
 
+// FIXME: Add boolean for is watched attribute
+
 // * Movie DB Schema * //
 const MovieSchema = mongoose.Schema(
   {
