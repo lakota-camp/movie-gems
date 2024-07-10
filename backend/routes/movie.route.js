@@ -3,6 +3,8 @@ const router = express.Router();
 const { body, param } = require('express-validator');
 const handleInputErrors = require('../middleware/InputError');
 
+// Extract common input validation functionality - more DRY
+
 const {
   createMovie,
   getAllMovies,
