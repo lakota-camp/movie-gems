@@ -14,15 +14,9 @@ export const MovieProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Loading state
-  const loadingState = () => {
-    setLoading(true);
-    setError(null);
-  };
-
   // Function to search movies from Search endpoint
   const searchMovies = async (query) => {
-    loadingState();
+    setLoading(true);
     try {
       const response = await axios.get(
         `${url}/${endpoint}/search?title=${query}`,
@@ -38,7 +32,7 @@ export const MovieProvider = ({ children }) => {
 
   // Function to add movie
   const addMovie = async (movieData) => {
-    loadingState();
+    setLoading(true);
     try {
       await axios.post(`${url}/${endpoint}`, movieData);
       // refresh movie list when movie is added
@@ -51,8 +45,11 @@ export const MovieProvider = ({ children }) => {
 
   // Function to get all movies
   const getAllMovies = async () => {
-    loadingState();
+    setLoading(true);
     try {
+      // // To test loading and error states
+      // await new Promise((resolve) => setTimeout(resolve, 2000));
+      // throw new Error("Simulated error");
       const response = await axios.get(`${url}/${endpoint}/`);
       setData(response.data);
     } catch (error) {
@@ -64,7 +61,7 @@ export const MovieProvider = ({ children }) => {
 
   // Function to update a movie
   const updateMovie = async (id, updateData) => {
-    loadingState();
+    setLoading(true);
     try {
       await axios.put(`${url}/${endpoint}/${id}`, updateData);
       // refresh movie list when movie is added
@@ -76,16 +73,15 @@ export const MovieProvider = ({ children }) => {
   };
 
   // Function to delete movie
-  const deleteMovie = async (id, updateData) => {
-    loadingState();
+  const deleteMovie = async (id) => {
     try {
-      await axios.delete(`${url}/${endpoint}/${id}`, updateData);
+      await axios.delete(`${url}/${endpoint}/${id}`);
       // refresh movie list when movie is added
-      getAllMovies();
+      const newData = data.filter((movie) => movie._id !== id);
+      setData(newData);
     } catch (error) {
       setError(error);
     }
-    setLoading(false);
   };
 
   return (

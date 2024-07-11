@@ -1,39 +1,24 @@
-const url = "http://localhost:3000/api/movies";
-
-  const { data, loading, error } = useFetchData(url);
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error fetching data...</div>;
-  }
-
-  return (
-    <>
-      <div>
-        <h1>
-          <strong>Movie Gems</strong>
-        </h1>
-        <div className="container">
-          <ul>
-            {data.map((data) => (
-              <div key={data._id}>
-                <li>
-                  <strong>
-                    Title: {data.title} | Year: {data.year} | Runtime:{" "}
-                    {data.runtime} | Genre: {data.genre}
-                  </strong>
-                </li>
-                <li>{data.description}</li>
-                <li>
-                  <img src={data.poster} alt={data.title} />
-                </li>
-              </div>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </>
-  );
+Material-UI Components
+	1.	AppBar:
+	•	Use AppBar for the top navigation bar.
+	•	Include components like Toolbar, Typography, and IconButton for a complete header.
+	2.	Container:
+	•	Use Container to center and constrain the width of your content.
+	3.	Grid:
+	•	Use Grid for responsive layout and aligning your movie cards in a flexible grid layout.
+	4.	Card:
+	•	Use Card, CardMedia, CardContent, and CardActions to display movie details effectively.
+	5.	Button:
+	•	Use Button for actions like search, add to watchlist, update status, and delete.
+	6.	TextField:
+	•	Use TextField for input fields, such as search bars and forms.
+	7.	Typography:
+	•	Use Typography for consistent text styling across your app.
+	8.	Dialog:
+	•	Use Dialog for modal pop-ups, such as detailed movie information or confirmation dialogs for delete actions.
+	9.	Snackbar:
+	•	Use Snackbar for notifications and alerts, like successful actions or error messages.
+	10.	CircularProgress:
+	•	Use CircularProgress for loading indicators.
+	11.	Paper:
+	•	Use Paper for creating surfaces with elevation and background.

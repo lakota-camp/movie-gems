@@ -11,7 +11,7 @@ const MovieList = () => {
   }, []);
 
   const movieList = movies || [];
-  console.log(movieList);
+  // console.log(movieList);
 
   if (loading) return <LoadingSpinner />;
   if (error) return <ErrorMessage />;

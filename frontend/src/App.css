@@ -1,44 +1,12 @@
-.container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding: 2rem;
-  /* border: solid red; */
-}
-
-h1,
-h2,
-p {
-  text-align: center;
-  margin: 1rem 0;
-  font-size: 3rem;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
-}
-
-.movie-list {
+/* .movie-list {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
   justify-content: center;
-  /* border: solid red; */
-}
+  border: solid red;
+  padding: 0.5rem;
+} */
 
-.movie-card {
-  display: flex;
-  flex-wrap: wrap;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 1rem;
-  margin: 0.4rem;
-  width: 200px;
-  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
-  text-align: center;
+.container {
   /* border: solid red; */
-}
-
-.movie-card img {
-  max-width: 100%;
-  height: auto;
-  display: block;
 }
