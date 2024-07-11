@@ -8,7 +8,7 @@ const AddButton = ({ text, ...props }) => {
       variant="contained"
       color={"primary"}
       {...props}
-      sx={{ padding: 1 }}
+      sx={{ padding: 2 }}
     >
       {text}
     </Button>

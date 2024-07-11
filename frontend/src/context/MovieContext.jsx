@@ -8,7 +8,13 @@ const MovieContext = createContext();
 
 export const useMovies = () => useContext(MovieContext);
 
+import PropTypes from "prop-types";
+
 export const MovieProvider = ({ children }) => {
+  // Prop validation
+  MovieProvider.propTypes = {
+    children: PropTypes.node.isRequired,
+  };
   // Set states
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -61,7 +67,6 @@ export const MovieProvider = ({ children }) => {
 
   // Function to update a movie
   const updateMovie = async (id, updateData) => {
-    setLoading(true);
     try {
       await axios.put(`${url}/${endpoint}/${id}`, updateData);
       // refresh movie list when movie is added

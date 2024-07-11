@@ -7,7 +7,7 @@ const DeleteButton = ({ text, ...props }) => {
       size="small"
       variant="outlined"
       color={"secondary"}
-      sx={{ padding: 1 }}
+      sx={{ padding: 2 }}
       {...props}
     >
       {text}

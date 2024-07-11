@@ -4,22 +4,26 @@ import DeleteButton from "./DeleteButton";
 import AddButton from "./AddButton";
 import { Card } from "@mui/material";
 import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 // import Typography from "@mui/material/Typography";
 
 const MovieCard = ({ movie }) => {
-  const { deleteMovie } = useMovies();
+  const { deleteMovie, updateMovie } = useMovies();
 
+  // Function to handle delete event
   const handleDelete = (e) => {
     e.preventDefault();
     deleteMovie(movie._id);
+    alert(`Movie '${movie.title}' deleted.`);
   };
-  // const handleUpdate = () => {
-  //   // sets update data to opposite of current boolean value
-  //   const updateData = { ...movie, watched: !movie.watched };
-  //   updateMovie(movie._id, updateData);
-  // };
+
+  // Function to handle update event
+  const handleUpdate = (e) => {
+    e.preventDefault();
+    const updateData = { watched: !movie.watched };
+    console.log(updateData);
+    updateMovie(movie._id, updateData);
+  };
 
   return (
     <>
@@ -29,22 +33,16 @@ const MovieCard = ({ movie }) => {
           image={movie.poster}
           title={movie.title}
         />
-        <CardContent>
-          {/* <Typography gutterBottom variant="h5" component="div">
-            {movie.title}
-          </Typography> */}
-          {/* <Typography variant="body2" color="text.secondary">
-            {movie.description}
-          </Typography> */}
-        </CardContent>
+
         <CardActions
           sx={{
             display: "flex",
             justifyContent: "space-evenly",
             paddingBottom: 5,
+            paddingTop: 5,
           }}
         >
-          <AddButton text="Add to watch list" />
+          <AddButton onClick={handleUpdate} text="Add to watch list" />
           <DeleteButton onClick={handleDelete} text="Delete" />{" "}
         </CardActions>
       </Card>
