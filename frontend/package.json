@@ -8,7 +8,9 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint \"src/**/*.{js,jsx}\" --quiet",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prestart": "node config.js",
+    "prebuild": "node config.js"
   },
   "keywords": [],
   "author": "Lakota Camp",
