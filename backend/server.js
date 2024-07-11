@@ -6,7 +6,11 @@ const connectDB = require('./config/db');
 const movieRoute = require('./routes/movie.route');
 // Middleware
 const { protect } = require('./middleware/auth');
-const { requestLogger, ipLogger } = require('./middleware/requestLog');
+const {
+  requestLogger,
+  ipLogger,
+  timeRequestLog,
+} = require('./middleware/requestLog');
 const cors = require('cors');
 
 const app = express();
@@ -21,6 +25,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(requestLogger);
 app.use(ipLogger);
+app.use(timeRequestLog);
 
 // * Routes * //
 

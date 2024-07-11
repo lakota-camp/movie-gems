@@ -41,7 +41,7 @@ class MovieService {
 
     if (!cachedMovie) {
       const response = await axios.get(
-        `http://www.omdbapi.com/?apikey=${apiKey}&t=${title}&type=series`,
+        `http://www.omdbapi.com/?apikey=${apiKey}&t=${title}&type=movie`,
       );
 
       // Response from API

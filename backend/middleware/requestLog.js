@@ -17,6 +17,12 @@ const ipLogger = (req, res, next) => {
   next();
 };
 
+const timeRequestLog = (req, res, next) => {
+  const requestDate = new Date();
+  console.log(`Request Date: ${requestDate}`);
+  next();
+};
+
 // * Request counter * //
 let requestCount = 0;
 const requestCounter = (req, res, next) => {
@@ -28,4 +34,5 @@ module.exports = {
   requestLogger,
   requestCounter,
   ipLogger,
+  timeRequestLog,
 };
