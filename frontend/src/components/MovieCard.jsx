@@ -26,7 +26,7 @@ const MovieCard = ({ movie }) => {
 
   return (
     <>
-      <Card sx={{ maxWidth: 345 }}>
+      <Card elevation={10} sx={{ maxWidth: 345 }}>
         <CardMedia
           sx={{ height: 500 }}
           image={movie.poster}

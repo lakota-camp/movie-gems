@@ -77,7 +77,7 @@ const deleteMovie = async (req, res) => {
 // Search OMDB API for movie
 const searchMovies = async (req, res) => {
   // Destructure title from query parameter
-  const { title, type, year } = req.query;
+  const { title } = req.query;
   console.log('Search title:', title);
 
   // Check to see if title exists in query parameter
@@ -88,7 +88,7 @@ const searchMovies = async (req, res) => {
   }
 
   try {
-    const movie = await movieService.searchMovies(title);
+    const movie = await movieService.searchSingleMovie(title);
     console.log(movie);
 
     res.status(200).json(movie);

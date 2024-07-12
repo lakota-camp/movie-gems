@@ -7,6 +7,7 @@ import theme from "./theme";
 import Navbar from "./components/Navbar";
 import Results from "./v2/Results";
 import SearchParams from "./v2/SearchParams";
+import UserMovieGrid from "./components/UserMovieGrid";
 
 function App() {
   return (
@@ -14,12 +15,12 @@ function App() {
       <CssBaseline />
       <MovieProvider>
         {/* <header>
-          <Link to="/">
-            <Navbar text="Movie Gems" />
-          </Link>
+          <Navbar text="Movie Gems" />
+          <Link to="/"></Link>
         </header> */}
         <Routes>
-          <Route path="/" element={<SearchParams />} />
+          <Route path="/search" element={<SearchParams />} />
+          <Route path="/" element={<UserMovieGrid />} />
         </Routes>
       </MovieProvider>
     </ThemeProvider>

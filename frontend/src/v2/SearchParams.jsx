@@ -1,6 +1,10 @@
 import { useState } from "react";
-import Results from "./Results";
 import MovieCardResult from "./MovieCardResult";
+import Grid from "@mui/material/Grid";
+
+import Box from "@mui/material/Box";
+
+import Container from "@mui/material/Container";
 
 const SearchParams = () => {
   const url = "http://localhost:3000";
@@ -45,7 +49,22 @@ const SearchParams = () => {
         </label>
         <button type="submit">Search</button>
       </form>
-      <MovieCardResult movie={movies} />
+      <Container maxWidth="xxl">
+        <Box sx={{ width: "100%", padding: 2 }}>
+          <Grid
+            container
+            rowSpacing={3}
+            columnSpacing={{ xs: 1, sm: 1, md: 1, lg: 1, xl: 1 }}
+            justifyContent="center"
+          >
+            {movies.map((movie) => (
+              <Grid item xs={12} sm={6} md={4} lg={3} key={movie._id}>
+                <MovieCardResult movie={movie} />
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
+      </Container>
     </div>
   );
 };

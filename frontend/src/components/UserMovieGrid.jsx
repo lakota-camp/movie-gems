@@ -1,5 +1,6 @@
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
 import { useEffect } from "react";
 import { useMovies } from "../context/MovieContext";
 import MovieCard from "./MovieCard";

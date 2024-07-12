@@ -27,7 +27,9 @@ class MovieService {
   // FIXME: change update to only allow user to be able to update boolean for is watched attribute
 
   async updateMovie(id, data) {
-    return await Movie.findByIdAndUpdate(id, data, {
+    // Ensure only `isWatched` attribute can be updated
+    const updateData = { isWatched: data.isWatched };
+    return await Movie.findByIdAndUpdate(id, updateData, {
       new: true,
     });
   }
@@ -37,6 +39,42 @@ class MovieService {
   }
 
   async searchMovies(title) {
+    let cachedMovie = myCache.get(title);
+
+    if (!cachedMovie) {
+      const response = await axios.get(
+        `http://www.omdbapi.com/?apikey=${apiKey}&s=${title}&type=movie`,
+      );
+
+      // Response from API
+      const movies = response.data;
+
+      if (movies.Response === 'False') {
+        throw new Error('Movie not found.');
+      }
+
+      // Cache the search results
+      myCache.set(title, movies.Search);
+
+      // // If movie found in from API -> Add movie to DB
+      // const newMovie = new Movie({
+      //   title: movies.Title,
+      //   year: movies.Year,
+      //   runtime: movies.Runtime,
+      //   genre: movies.Genre,
+      //   director: movies.Director,
+      //   actors: movies.Actors,
+      //   description: movies.Plot,
+      //   poster: movies.Poster,
+      // });
+
+      return movies.Search;
+    } else {
+      return cachedMovie;
+    }
+  }
+
+  async searchSingleMovie(title) {
     let cachedMovie = myCache.get(title);
 
     if (!cachedMovie) {
