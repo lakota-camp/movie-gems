@@ -3,8 +3,9 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import SearchMoviesForm from "./SearchMovies";
 
-export default function Navbar({ text }) {
+const Navbar = ({ text }) => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -16,12 +17,15 @@ export default function Navbar({ text }) {
           >
             {text}
           </Typography>
+          <SearchMoviesForm />
         </Toolbar>
       </AppBar>
     </Box>
   );
-}
+};
 
 Navbar.propTypes = {
   text: PropTypes.string.isRequired,
 };
+
+export default Navbar;

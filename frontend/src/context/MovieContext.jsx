@@ -16,7 +16,8 @@ export const MovieProvider = ({ children }) => {
     children: PropTypes.node.isRequired,
   };
   // Set states
-  const [data, setData] = useState([]);
+  const [movies, setMovies] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -27,7 +28,7 @@ export const MovieProvider = ({ children }) => {
       const response = await axios.get(
         `${url}/${endpoint}/search?title=${query}`,
       );
-      setData(response.data);
+      setSearchResults(response.data);
     } catch (error) {
       setError(error);
     }
@@ -53,11 +54,12 @@ export const MovieProvider = ({ children }) => {
   const getAllMovies = async () => {
     setLoading(true);
     try {
-      // // To test loading and error states
+      // To test loading and error states
       // await new Promise((resolve) => setTimeout(resolve, 2000));
       // throw new Error("Simulated error");
       const response = await axios.get(`${url}/${endpoint}/`);
-      setData(response.data);
+      setMovies(response.data);
+      console.log("API Response:", response.data);
     } catch (error) {
       console.error("Error fetching movies:", error.message);
       setError(error);
@@ -82,19 +84,21 @@ export const MovieProvider = ({ children }) => {
     try {
       await axios.delete(`${url}/${endpoint}/${id}`);
       // refresh movie list when movie is added
-      const newData = data.filter((movie) => movie._id !== id);
-      setData(newData);
+      const newData = movies.filter((movie) => movie._id !== id);
+      setMovies(newData);
     } catch (error) {
       setError(error);
     }
+    setLoading(false);
   };
 
   return (
     <MovieContext.Provider
       value={{
-        data,
+        movies,
         loading,
         error,
+        searchResults,
         searchMovies,
         addMovie,
         getAllMovies,

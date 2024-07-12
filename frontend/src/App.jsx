@@ -1,10 +1,12 @@
 import "./App.css";
 import { MovieProvider } from "./context/MovieContext";
 import { ThemeProvider } from "@mui/material/styles";
+import { Link, Routes, Route } from "react-router-dom";
 import CssBaseline from "@mui/material/CssBaseline";
 import theme from "./theme";
 import Container from "@mui/material/Container";
-import MovieGrid from "./components/MovieGrid";
+import UserMovieGrid from "./components/UserMovieGrid";
+import ResultsMovieGrid from "./components/ResultsMovieGrid";
 import Navbar from "./components/Navbar";
 
 function App() {
@@ -12,10 +14,15 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <MovieProvider>
-        <Navbar text="Movie Gems" />
-        <Container maxWidth="xl" className="container" sx={{ marginTop: 4 }}>
-          <MovieGrid />
-        </Container>
+        <header>
+          <Link to="/">
+            <Navbar text="Movie Gems" />
+          </Link>
+        </header>
+        <Routes>
+          <Route path="/" element={<UserMovieGrid />} />
+          <Route path="/search/:id" element={<ResultsMovieGrid />} />
+        </Routes>
       </MovieProvider>
     </ThemeProvider>
   );

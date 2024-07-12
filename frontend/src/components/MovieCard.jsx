@@ -14,7 +14,6 @@ const MovieCard = ({ movie }) => {
   const handleDelete = (e) => {
     e.preventDefault();
     deleteMovie(movie._id);
-    alert(`Movie '${movie.title}' deleted.`);
   };
 
   // Function to handle update event
