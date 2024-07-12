@@ -4,24 +4,22 @@ import { ThemeProvider } from "@mui/material/styles";
 import { Link, Routes, Route } from "react-router-dom";
 import CssBaseline from "@mui/material/CssBaseline";
 import theme from "./theme";
-import Container from "@mui/material/Container";
-import UserMovieGrid from "./components/UserMovieGrid";
-import ResultsMovieGrid from "./components/ResultsMovieGrid";
 import Navbar from "./components/Navbar";
+import Results from "./v2/Results";
+import SearchParams from "./v2/SearchParams";
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <MovieProvider>
-        <header>
+        {/* <header>
           <Link to="/">
             <Navbar text="Movie Gems" />
           </Link>
-        </header>
+        </header> */}
         <Routes>
-          <Route path="/" element={<UserMovieGrid />} />
-          <Route path="/search/:id" element={<ResultsMovieGrid />} />
+          <Route path="/" element={<SearchParams />} />
         </Routes>
       </MovieProvider>
     </ThemeProvider>

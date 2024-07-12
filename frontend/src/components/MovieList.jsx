@@ -1,28 +1,15 @@
-import { useEffect } from "react";
-import { useMovies } from "../context/MovieContext";
-import MovieCard from "./MovieCard";
+import { useQuery } from "@tanstack/react-query";
+import useFetchData from "../hooks/FetchApi";
 import LoadingSpinner from "./LoadingSpinner";
 import ErrorMessage from "./ErrorMessage";
 
 const MovieList = () => {
-  const { data: movies, loading, error, getAllMovies } = useMovies();
-  useEffect(() => {
-    getAllMovies();
-  }, []);
-
-  const movieList = movies || [];
-  // console.log(movieList);
+  const { data, loading, error } = useFetchData();
 
   if (loading) return <LoadingSpinner />;
   if (error) return <ErrorMessage />;
 
-  return (
-    <div className="movie-list">
-      {movieList.map((movie) => (
-        <MovieCard key={movie._id} movie={movie} />
-      ))}
-    </div>
-  );
+  return <></>;
 };
 
 export default MovieList;
