@@ -1,69 +1,97 @@
 const mongoose = require('mongoose');
 
-// Movie catagories allowed
-const genresCategories = [
-  'Action',
-  'Adventure',
-  'Comedy',
-  'Drama',
-  'Fantasy',
-  'Horror',
-  'Mystery',
-  'Romance',
-  'Science Fiction (Sci-Fi)',
-  'Thriller',
-  'Western',
-  'Animation',
-  'Documentary',
-  'Family',
-  'Musical',
-  'Crime',
-  'War',
-  'Biography',
-  'Historical',
-  'Sport',
-];
-
 // * Movie DB Schema * //
 const MovieSchema = mongoose.Schema(
   {
-    title: {
+    Title: {
       type: String,
       required: true,
     },
-    year: {
+    Year: {
       type: String,
       required: false,
     },
-    runtime: {
+    Runtime: {
       type: String,
       required: false,
     },
-    genre: {
+    Genre: {
       type: String,
       required: false,
     },
-    director: {
+    Director: {
       type: String,
       required: false,
     },
-    actors: {
+    Actors: {
       type: String,
       required: false,
     },
-    description: {
+    Plot: {
       type: String,
       required: false,
     },
-    poster: {
+    Poster: {
       type: String,
       required: false,
     },
-    watched: {
+    Rated: {
+      type: String,
+      required: false,
+    },
+    Released: {
+      type: String,
+      required: false,
+    },
+    Language: {
+      type: String,
+      required: false,
+    },
+    Country: {
+      type: String,
+      required: false,
+    },
+    Awards: {
+      type: String,
+      required: false,
+    },
+    imdbRating: {
+      type: String,
+      required: false,
+    },
+    imdbVotes: {
+      type: String,
+      required: false,
+    },
+    imdbID: {
+      type: String,
+      required: true,
+    },
+    Type: {
+      type: String,
+      required: false,
+    },
+    DVD: {
+      type: String,
+      required: false,
+    },
+    BoxOffice: {
+      type: String,
+      required: false,
+    },
+    Production: {
+      type: String,
+      required: false,
+    },
+    Website: {
+      type: String,
+      required: false,
+    },
+    Watched: {
       type: Boolean,
-      required: true,
       default: false,
     },
+
     // Future Update: users have their own movie lists
     // ,
     // userId: {
@@ -71,10 +99,6 @@ const MovieSchema = mongoose.Schema(
     //   ref: 'User',
     //   required: true,
     // }
-    movieApiId: {
-      type: String,
-      // required: true,
-    },
   },
   {
     timestamps: true,

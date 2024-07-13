@@ -7,26 +7,18 @@ const validateId = [
 
 // validates movie body
 const validateMovieBody = [
-  body('title')
+  body('Title')
     .notEmpty()
     .isString()
     .withMessage('Title is required and must be a string.'),
-  body('runtime')
-    .optional()
-    .isString()
-    .withMessage('Runtime must be a string.'),
-  body('genre').optional().isString().withMessage('Genre must be a string.'),
-  body('year').optional().isString().withMessage('Year must be a string.'),
-  body('director')
-    .optional()
-    .isString()
-    .withMessage('Director must be a string.'),
-  body('actors').optional().isString().withMessage('Actors must be a string.'),
-  body('description')
+  body('Year').notEmpty().isString().withMessage('Year must be a string.'),
+  body('Plot')
     .optional()
     .isString()
     .withMessage('Description must be a string.'),
-  body('poster').optional().isString().withMessage('Poster must be a string.'),
+  body('Poster').optional().isString().withMessage('Poster must be a string.'),
+  body('imdbID').optional().isString().withMessage('imdbID must be a string'),
+  body('Type').optional().isString().withMessage('Must be include type.'),
 ];
 
 // validates update to true or false

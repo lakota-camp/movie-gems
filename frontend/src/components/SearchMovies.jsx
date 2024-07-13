@@ -51,7 +51,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const SearchMoviesForm = () => {
-  const { movies, loading, error, searchMovies } = useMovies();
+  const { loading, error, searchMovies } = useMovies();
 
   const [search, setSearch] = useState("");
 

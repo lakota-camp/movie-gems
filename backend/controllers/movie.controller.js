@@ -7,7 +7,9 @@ const movieService = require('../services/movieService');
 // Create a movie
 const createMovie = async (req, res) => {
   try {
-    const movie = await movieService.createMovie(req.body);
+    console.log('movie:', req.body);
+    const newMovie = await movieService.createMovie(req.body);
+    const movie = await newMovie.save();
     res.status(201).json(movie);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -44,7 +46,7 @@ const getMovieById = async (req, res) => {
 // Update a movie
 const updateMovie = async (req, res) => {
   try {
-    const movie = await movieService.updateMovie(req.params.id, req.body);
+    const movie = await movieService.updateMovie(req.body);
     // Check if movie exists
     if (!movie) {
       return res.status(404).json({ message: 'Movie not found' });
@@ -77,8 +79,9 @@ const deleteMovie = async (req, res) => {
 // Search OMDB API for movie
 const searchMovies = async (req, res) => {
   // Destructure title from query parameter
-  const { title } = req.query;
+  const { title, type } = req.query;
   console.log('Search title:', title);
+  // console.log('Search type:', type);
 
   // Check to see if title exists in query parameter
   if (!title) {
@@ -87,14 +90,18 @@ const searchMovies = async (req, res) => {
       .json({ error: 'Title query parameter is required.' });
   }
 
+  // if (!type) {
+  //   return res.status(400).json({ error: 'Type query parameter is required.' });
+  // }
+
   try {
-    const movie = await movieService.searchSingleMovie(title);
+    const movie = await movieService.searchMovies(title);
     console.log(movie);
 
     res.status(200).json(movie);
   } catch (error) {
-    console.error('Error fetching movie:', error.message);
-    res.status(500).json({ error: 'Failed search for movie.' });
+    console.error('Error fetching title:', error.message);
+    res.status(500).json({ error: 'Failed search for title.' });
   }
 };
 

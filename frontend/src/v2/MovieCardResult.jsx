@@ -1,11 +1,29 @@
-import PropTypes from "prop-types";
-
 import { Card } from "@mui/material";
 import CardActions from "@mui/material/CardActions";
 import CardMedia from "@mui/material/CardMedia";
+import AddButton from "../components/AddButton";
+import { useMovies } from "../context/MovieContext";
+
 // import Typography from "@mui/material/Typography";
 
 const MovieCard = ({ movie }) => {
+  const { addMovie } = useMovies();
+
+  // Function to handle update event
+  const handleAdd = (e) => {
+    e.preventDefault();
+    const movieData = {
+      Title: movie.Title,
+      Year: movie.Year,
+      imdbID: movie.imdbID,
+      Poster: movie.Poster,
+      Type: movie.Type,
+    };
+    addMovie(movieData);
+    console.log(movieData);
+    // alert(`'${movie.Title}' added to your watch list!`);
+  };
+
   return (
     <>
       <Card sx={{ maxWidth: 345 }}>
@@ -18,27 +36,15 @@ const MovieCard = ({ movie }) => {
           sx={{
             display: "flex",
             justifyContent: "space-evenly",
-            paddingBottom: 0,
-            paddingTop: 0,
+            paddingBottom: 5,
+            paddingTop: 5,
           }}
-        ></CardActions>
+        >
+          <AddButton onClick={handleAdd} text="Add to watch list" />
+        </CardActions>
       </Card>
     </>
   );
-};
-
-MovieCard.propTypes = {
-  movie: PropTypes.shape({
-    Title: PropTypes.string.isRequired,
-    Genre: PropTypes.string.isRequired,
-    Poster: PropTypes.string.isRequired,
-    Plot: PropTypes.string.isRequired,
-    Runtime: PropTypes.string.isRequired,
-    Actors: PropTypes.string.isRequired,
-    Director: PropTypes.string.isRequired,
-    _id: PropTypes.string.isRequired,
-    watched: PropTypes.bool.isRequired,
-  }).isRequired,
 };
 
 export default MovieCard;

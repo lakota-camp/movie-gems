@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import { useMovies } from "../context/MovieContext";
 import DeleteButton from "./DeleteButton";
 import AddButton from "./AddButton";
@@ -19,7 +18,7 @@ const MovieCard = ({ movie }) => {
   // Function to handle update event
   const handleUpdate = (e) => {
     e.preventDefault();
-    const updateData = { watched: !movie.watched };
+    const updateData = { Watched: !movie.Watched };
     console.log(updateData);
     updateMovie(movie._id, updateData);
   };
@@ -29,8 +28,8 @@ const MovieCard = ({ movie }) => {
       <Card elevation={10} sx={{ maxWidth: 345 }}>
         <CardMedia
           sx={{ height: 500 }}
-          image={movie.poster}
-          title={movie.title}
+          image={movie.Poster}
+          title={movie.Title}
         />
 
         <CardActions
@@ -41,23 +40,12 @@ const MovieCard = ({ movie }) => {
             paddingTop: 5,
           }}
         >
-          <AddButton onClick={handleUpdate} text="Add to watch list" />
+          <AddButton onClick={handleUpdate} text="Mark as watched" />
           <DeleteButton onClick={handleDelete} text="Delete" />{" "}
         </CardActions>
       </Card>
     </>
   );
-};
-
-MovieCard.propTypes = {
-  movie: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    poster: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    _id: PropTypes.string.isRequired,
-    watched: PropTypes.bool.isRequired,
-  }).isRequired,
 };
 
 export default MovieCard;

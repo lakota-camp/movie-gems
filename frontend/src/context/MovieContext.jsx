@@ -8,13 +8,7 @@ const MovieContext = createContext();
 
 export const useMovies = () => useContext(MovieContext);
 
-import PropTypes from "prop-types";
-
 export const MovieProvider = ({ children }) => {
-  // Prop validation
-  MovieProvider.propTypes = {
-    children: PropTypes.node.isRequired,
-  };
   // Set states
   const [movies, setMovies] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
@@ -24,13 +18,16 @@ export const MovieProvider = ({ children }) => {
   // Function to search movies from Search endpoint
   const searchMovies = async (query) => {
     setLoading(true);
+    setError(null);
     try {
       const response = await axios.get(
         `${url}/${endpoint}/search?title=${query}`,
       );
-      setSearchResults(response.data);
+      console.log("Fetched Movies:", response.data);
+      setSearchResults(Array.isArray(response.data) ? response.data : []);
     } catch (error) {
       setError(error);
+      setSearchResults([]);
     }
     setLoading(false);
   };
