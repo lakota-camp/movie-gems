@@ -23,10 +23,11 @@ const validateMovieBody = [
 
 // validates update to true or false
 const validateWatchedUpdate = [
-  body('watched')
+  body('Watched')
     .notEmpty()
     .isBoolean()
     .withMessage('Must be either true or false.'),
+  param('id').notEmpty().isMongoId().withMessage('Valid Movie ID is required'),
 ];
 
 // validates search query params

@@ -46,13 +46,23 @@ const getMovieById = async (req, res) => {
 // Update a movie
 const updateMovie = async (req, res) => {
   try {
-    const movie = await movieService.updateMovie(req.body);
-    // Check if movie exists
-    if (!movie) {
+    const { id } = req.params;
+    const { Watched } = req.body;
+
+    if (!id) {
+      return res.status(400).json({ message: 'Movie ID is required' });
+    }
+
+    const updatedMovie = await movieService.updateMovie(id, { Watched });
+
+    if (!updatedMovie) {
       return res.status(404).json({ message: 'Movie not found' });
     }
-    res.status(200).json(movie);
+
+    // Check if movie exists
+    res.status(200).json(updatedMovie);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ message: error.message });
   }
 };

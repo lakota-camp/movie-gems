@@ -1,9 +1,10 @@
+import { useState } from "react";
+import { useMovies } from "../context/MovieContext";
+import { useNavigate } from "react-router-dom";
+
 import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
-
-import { useState } from "react";
-import { useMovies } from "../context/MovieContext";
 
 import LoadingSpinner from "./LoadingSpinner";
 import ErrorMessage from "./ErrorMessage";
@@ -51,39 +52,36 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const SearchMoviesForm = () => {
-  const { loading, error, searchMovies } = useMovies();
+  const { searchMovies, loading, error } = useMovies();
+
+  const pageNavigate = useNavigate();
 
   const [search, setSearch] = useState("");
 
-  const handleInputChange = (e) => {
-    setSearch(e.target.value);
-  };
-
-  const handleSubmit = (e) => {
+  const handleSearch = (e) => {
     e.preventDefault();
-    searchMovies();
-    if (search.trim()) {
-      searchMovies(search.trim());
-    }
+    searchMovies(search);
+    pageNavigate("/search/movies");
   };
-
-  if (loading) return <LoadingSpinner />;
-  if (error) return <ErrorMessage />;
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Search>
-        <SearchIconWrapper>
-          <SearchIcon />
-        </SearchIconWrapper>
-        <StyledInputBase
-          placeholder="Search…"
-          inputProps={{ "aria-label": "search" }}
-          value={search}
-          onChange={handleInputChange}
-        />
-      </Search>
-    </form>
+    <>
+      <form onSubmit={handleSearch}>
+        <Search>
+          <SearchIconWrapper>
+            <SearchIcon />
+          </SearchIconWrapper>
+          <StyledInputBase
+            placeholder="Search…"
+            inputProps={{ "aria-label": "search" }}
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </Search>
+      </form>
+      {loading && <LoadingSpinner />}
+      {error && <ErrorMessage />}
+    </>
   );
 };
 

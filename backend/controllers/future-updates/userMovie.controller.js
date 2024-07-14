@@ -53,10 +53,10 @@ const getMovieById = async (req, res) => {
 const updateMovie = async (req, res) => {
   try {
     // Convert watched field from string to boolean
-    const watchedStatus = req.body.watched === 'true';
+    const watchedStatus = req.body.Watched === 'true';
     const movie = await Movie.findByIdAndUpdate(
       req.params.id,
-      { watched: watchedStatus },
+      { Watched: watchedStatus },
       { new: true },
     );
     // Check if movie exists

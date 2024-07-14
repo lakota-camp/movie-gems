@@ -1,13 +1,13 @@
 import { useMovies } from "../context/MovieContext";
-import DeleteButton from "./DeleteButton";
-import AddButton from "./AddButton";
+import ButtonMain from "./Button";
 import { Card } from "@mui/material";
 import CardActions from "@mui/material/CardActions";
 import CardMedia from "@mui/material/CardMedia";
+import { Link } from "react-router-dom";
 // import Typography from "@mui/material/Typography";
 
-const MovieCard = ({ movie }) => {
-  const { deleteMovie, updateMovie } = useMovies();
+const MovieCard = ({ movie, isSearch }) => {
+  const { addMovie, deleteMovie, updateMovie } = useMovies();
 
   // Function to handle delete event
   const handleDelete = (e) => {
@@ -18,32 +18,71 @@ const MovieCard = ({ movie }) => {
   // Function to handle update event
   const handleUpdate = (e) => {
     e.preventDefault();
-    const updateData = { Watched: !movie.Watched };
-    console.log(updateData);
+    const updateData = { Watched: true };
+    console.log("Update data:", updateData);
+    console.log("Movie Id:", movie._id);
     updateMovie(movie._id, updateData);
+  };
+
+  // Function to handle update event
+  const handleAdd = (e) => {
+    e.preventDefault();
+    const movieData = {
+      Title: movie.Title,
+      Year: movie.Year,
+      imdbID: movie.imdbID,
+      Poster: movie.Poster,
+      Type: movie.Type,
+    };
+    addMovie(movieData);
+    alert(`'${movie.Title}' added to your watch list!`);
   };
 
   return (
     <>
-      <Card elevation={10} sx={{ maxWidth: 345 }}>
-        <CardMedia
-          sx={{ height: 500 }}
-          image={movie.Poster}
-          title={movie.Title}
-        />
-
-        <CardActions
-          sx={{
-            display: "flex",
-            justifyContent: "space-evenly",
-            paddingBottom: 5,
-            paddingTop: 5,
-          }}
-        >
-          <AddButton onClick={handleUpdate} text="Mark as watched" />
-          <DeleteButton onClick={handleDelete} text="Delete" />{" "}
-        </CardActions>
-      </Card>
+      <Link to={`/user/movies/details/${movie._id}`}>
+        <Card elevation={10} sx={{ maxWidth: 345 }}>
+          <CardMedia
+            sx={{ height: 500 }}
+            image={movie.Poster}
+            title={movie.Title}
+            id={movie._id}
+          />
+          <CardActions
+            sx={{
+              display: "flex",
+              justifyContent: "space-evenly",
+              paddingBottom: 5,
+              paddingTop: 5,
+            }}
+          >
+            {/* Dynamically updates button choices based on user movies or search results */}
+            {isSearch ? (
+              <ButtonMain
+                onClick={handleAdd}
+                variant="contained"
+                text="Add to Watch list"
+                color="primary"
+              />
+            ) : (
+              <>
+                <ButtonMain
+                  onClick={handleUpdate}
+                  variant="contained"
+                  text="Mark as watched"
+                  color="primary"
+                />
+                <ButtonMain
+                  onClick={handleDelete}
+                  variant="outlined"
+                  text="Delete"
+                  color="secondary"
+                />
+              </>
+            )}
+          </CardActions>
+        </Card>
+      </Link>
     </>
   );
 };

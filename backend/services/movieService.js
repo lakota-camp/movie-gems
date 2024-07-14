@@ -27,8 +27,7 @@ class MovieService {
   // FIXME: change update to only allow user to be able to update boolean for is watched attribute
 
   async updateMovie(id, data) {
-    // Ensure only `isWatched` attribute can be updated
-    const updateData = { isWatched: data.isWatched };
+    const updateData = { Watched: data.Watched };
     return await Movie.findByIdAndUpdate(id, updateData, {
       new: true,
     });

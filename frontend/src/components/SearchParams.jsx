@@ -1,15 +1,17 @@
 import { useState } from "react";
 import { useMovies } from "../context/MovieContext";
+import { useNavigate } from "react-router-dom";
 
-import Results from "./Results";
-import LoadingSpinner from "../components/LoadingSpinner";
-import ErrorMessage from "../components/ErrorMessage";
+import LoadingSpinner from "./LoadingSpinner";
+import ErrorMessage from "./ErrorMessage";
 
 const SearchParams = () => {
   // const url = "http://localhost:3000";
   // const endpoint = "api/movies";
 
-  const { searchResults, searchMovies } = useMovies();
+  const { searchMovies, loading, error } = useMovies();
+
+  const pageNavigate = useNavigate();
 
   const TYPES = ["movie", "series", "episode"];
   const [type, setType] = useState("");
@@ -19,10 +21,11 @@ const SearchParams = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     searchMovies(search);
+    pageNavigate("/search/movies");
   };
 
   return (
-    <div>
+    <>
       <form onSubmit={handleSearch}>
         <label htmlFor="search">
           Search Movies
@@ -52,8 +55,9 @@ const SearchParams = () => {
 
         <button type="submit">Search</button>
       </form>
-      <Results movies={searchResults} />
-    </div>
+      {loading && <LoadingSpinner />}
+      {error && <ErrorMessage />}
+    </>
   );
 };
 

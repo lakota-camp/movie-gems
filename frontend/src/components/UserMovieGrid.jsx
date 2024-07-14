@@ -8,16 +8,17 @@ import ErrorMessage from "./ErrorMessage";
 import Container from "@mui/material/Container";
 
 const UserMovieGrid = () => {
-  const { movies, searchResults, loading, error, getAllMovies } = useMovies();
+  const { movies, searchResults, loading, error, getAllMovies, isSearch } =
+    useMovies();
 
   useEffect(() => {
     getAllMovies();
   }, []);
-  console.log("Search results:", searchResults);
-  const movieList = searchResults.length > 0 ? searchResults : movies;
 
   if (loading) return <LoadingSpinner />;
   if (error) return <ErrorMessage />;
+
+  const movieList = isSearch ? searchResults : movies;
 
   return (
     <Container maxWidth="xxl">
@@ -28,9 +29,10 @@ const UserMovieGrid = () => {
           columnSpacing={{ xs: 1, sm: 1, md: 1, lg: 1, xl: 1 }}
           justifyContent="center"
         >
+          {/* FIXME: Error with mapping over movies: TypeError: movieList.map is not a function */}
           {movieList.map((movie) => (
             <Grid item xs={12} sm={6} md={4} lg={3} key={movie._id}>
-              <MovieCard movie={movie} />
+              <MovieCard movie={movie} isSearch={false} />
             </Grid>
           ))}
         </Grid>

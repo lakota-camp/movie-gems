@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import SearchMoviesForm from "./SearchMovies";
+import { Link } from "react-router-dom";
 
 const Navbar = ({ text }) => {
   return (
@@ -15,8 +16,9 @@ const Navbar = ({ text }) => {
             component="div"
             sx={{ flexGrow: 1, marginLeft: 10, padding: 3 }}
           >
-            {text}
+            <Link to="/">{text}</Link>
           </Typography>
+
           <SearchMoviesForm />
         </Toolbar>
       </AppBar>
