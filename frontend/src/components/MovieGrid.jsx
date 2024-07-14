@@ -7,19 +7,27 @@ import LoadingSpinner from "./LoadingSpinner";
 import ErrorMessage from "./ErrorMessage";
 import Container from "@mui/material/Container";
 
-const UserMovieGrid = () => {
+const MovieGrid = () => {
   const { movies, searchResults, loading, error, getAllMovies, isSearch } =
     useMovies();
 
   useEffect(() => {
-    getAllMovies();
-  }, []);
+    if (!isSearch && movies.length === 0) {
+      getAllMovies();
+    }
+  }, [isSearch, movies.length, getAllMovies]);
 
   if (loading) return <LoadingSpinner />;
   if (error) return <ErrorMessage />;
 
-  const movieList = isSearch ? searchResults : movies;
+  let movieList = isSearch ? searchResults : movies;
 
+  // Ensure movieList is always an array
+  if (!Array.isArray(movieList)) {
+    movieList = Object.values(movieList);
+  }
+
+  console.log(typeof movieList);
   return (
     <Container maxWidth="xxl">
       <Box sx={{ width: "100%", padding: 2 }}>
@@ -32,7 +40,7 @@ const UserMovieGrid = () => {
           {/* FIXME: Error with mapping over movies: TypeError: movieList.map is not a function */}
           {movieList.map((movie) => (
             <Grid item xs={12} sm={6} md={4} lg={3} key={movie._id}>
-              <MovieCard movie={movie} isSearch={false} />
+              <MovieCard movie={movie} isSearch={isSearch} />
             </Grid>
           ))}
         </Grid>
@@ -41,4 +49,4 @@ const UserMovieGrid = () => {
   );
 };
 
-export default UserMovieGrid;
+export default MovieGrid;

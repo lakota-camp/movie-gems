@@ -51,6 +51,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+// ADD snackbar to notify user input can't be blank
+
 const SearchMoviesForm = () => {
   const { searchMovies, loading, error } = useMovies();
 
@@ -60,6 +62,10 @@ const SearchMoviesForm = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
+    if (!search.trim()) {
+      return;
+    }
+
     searchMovies(search);
     pageNavigate("/search/movies");
   };

@@ -52,6 +52,11 @@ export const MovieProvider = ({ children }) => {
   const deleteMovie = (id) =>
     request(() => movieService.deleteMovie(id), getAllMovies);
 
+  const resetSearch = () => {
+    setIsSearch(false);
+    setSearchResults([]);
+  };
+
   return (
     <MovieContext.Provider
       value={{
@@ -67,6 +72,7 @@ export const MovieProvider = ({ children }) => {
         deleteMovie,
         isSearch,
         movieDetails,
+        resetSearch,
       }}
     >
       {children}

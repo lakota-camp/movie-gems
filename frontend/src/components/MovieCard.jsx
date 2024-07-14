@@ -19,8 +19,6 @@ const MovieCard = ({ movie, isSearch }) => {
   const handleUpdate = (e) => {
     e.preventDefault();
     const updateData = { Watched: true };
-    console.log("Update data:", updateData);
-    console.log("Movie Id:", movie._id);
     updateMovie(movie._id, updateData);
   };
 
@@ -35,54 +33,53 @@ const MovieCard = ({ movie, isSearch }) => {
       Type: movie.Type,
     };
     addMovie(movieData);
-    alert(`'${movie.Title}' added to your watch list!`);
   };
 
   return (
     <>
-      <Link to={`/user/movies/details/${movie._id}`}>
-        <Card elevation={10} sx={{ maxWidth: 345 }}>
+      <Card elevation={10} sx={{ maxWidth: 345 }}>
+        <Link to={`/user/movies/details/${movie._id}`}>
           <CardMedia
             sx={{ height: 500 }}
             image={movie.Poster}
             title={movie.Title}
             id={movie._id}
           />
-          <CardActions
-            sx={{
-              display: "flex",
-              justifyContent: "space-evenly",
-              paddingBottom: 5,
-              paddingTop: 5,
-            }}
-          >
-            {/* Dynamically updates button choices based on user movies or search results */}
-            {isSearch ? (
+        </Link>
+        <CardActions
+          sx={{
+            display: "flex",
+            justifyContent: "space-evenly",
+            paddingBottom: 5,
+            paddingTop: 5,
+          }}
+        >
+          {/* Dynamically updates button choices based on user movies or search results */}
+          {isSearch ? (
+            <ButtonMain
+              onClick={handleAdd}
+              variant="contained"
+              text="Add to Watch list"
+              color="primary"
+            />
+          ) : (
+            <>
               <ButtonMain
-                onClick={handleAdd}
+                onClick={handleUpdate}
                 variant="contained"
-                text="Add to Watch list"
+                text="Mark as watched"
                 color="primary"
               />
-            ) : (
-              <>
-                <ButtonMain
-                  onClick={handleUpdate}
-                  variant="contained"
-                  text="Mark as watched"
-                  color="primary"
-                />
-                <ButtonMain
-                  onClick={handleDelete}
-                  variant="outlined"
-                  text="Delete"
-                  color="secondary"
-                />
-              </>
-            )}
-          </CardActions>
-        </Card>
-      </Link>
+              <ButtonMain
+                onClick={handleDelete}
+                variant="outlined"
+                text="Delete"
+                color="secondary"
+              />
+            </>
+          )}
+        </CardActions>
+      </Card>
     </>
   );
 };

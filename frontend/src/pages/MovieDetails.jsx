@@ -22,11 +22,13 @@ const MovieDetails = () => {
   if (!movieDetails) {
     return <h2>No Movie Found</h2>;
   }
+  console.log(movieDetails);
   // FIXME: Add function to get movie details by querying OMDB API using imdbId as query parameter.
   return (
     <div>
       <h2>Id: {id}</h2>
       <h2>Title: {movieDetails.Title}</h2>
+      <h2>imdbID: {movieDetails.imdbID}</h2>
     </div>
   );
 };

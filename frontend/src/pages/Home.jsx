@@ -1,12 +1,7 @@
-import UserMovieGrid from "../components/UserMovieGrid";
-import { Container } from "@mui/material";
-
 const Home = () => {
   return (
     <>
-      <Container maxWidth="xxl">
-        <UserMovieGrid />
-      </Container>
+      <h1>HOME</h1>
     </>
   );
 };
