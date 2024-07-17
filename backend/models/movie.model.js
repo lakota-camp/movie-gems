@@ -92,7 +92,7 @@ const MovieSchema = mongoose.Schema(
       default: false,
     },
 
-    // Future Update: users have their own movie lists
+    // Future Update: users have their own personal movie lists
     // ,
     // userId: {
     //   type: mongoose.Schema.Types.ObjectId,
