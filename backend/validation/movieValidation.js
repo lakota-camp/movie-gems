@@ -35,9 +35,14 @@ const validateSearchQuery = [
   query('title').notEmpty().withMessage('Title is required.'),
 ];
 
+const validateIdSearchQuery = [
+  query('id').notEmpty().withMessage('id is required.'),
+];
+
 module.exports = {
   validateId,
   validateMovieBody,
   validateWatchedUpdate,
   validateSearchQuery,
+  validateIdSearchQuery,
 };

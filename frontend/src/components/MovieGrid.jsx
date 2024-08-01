@@ -27,7 +27,10 @@ const MovieGrid = () => {
     movieList = Object.values(movieList);
   }
 
-  console.log(typeof movieList);
+  if (!Array.isArray(movieList)) {
+    movieList = [];
+  }
+
   return (
     <Container maxWidth="xxl">
       <Box sx={{ width: "100%", padding: 2 }}>
@@ -39,7 +42,14 @@ const MovieGrid = () => {
         >
           {/* FIXME: Error with mapping over movies: TypeError: movieList.map is not a function */}
           {movieList.map((movie) => (
-            <Grid item xs={12} sm={6} md={4} lg={3} key={movie._id}>
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              md={4}
+              lg={3}
+              key={movie._id || movie.imdbID}
+            >
               <MovieCard movie={movie} isSearch={isSearch} />
             </Grid>
           ))}

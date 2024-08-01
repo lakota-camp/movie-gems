@@ -15,42 +15,76 @@ export const MovieProvider = ({ children }) => {
   const [error, setError] = useState(null);
   const [isSearch, setIsSearch] = useState(false);
 
-  // Higher order function to make request depending on request type
-  const request = async (requestFunc, setData) => {
+  const getAllMovies = async () => {
+    setLoading(true);
+    setIsSearch(false);
     try {
-      const data = await requestFunc();
-      if (setData) {
-        setData(data);
-      }
-    } catch (error) {
-      setError(error);
+      const data = await movieService.fetchMovies();
+      setMovies(data);
+    } catch (err) {
+      setError(err);
+    } finally {
+      setLoading(false);
     }
   };
 
-  const getAllMovies = () => {
+  const getOneMovie = async (id) => {
+    setLoading(true);
     setIsSearch(false);
-    request(movieService.fetchMovies, setMovies);
+    try {
+      const data = await movieService.fetchOneMovie(id);
+      setMovieDetails(data);
+    } catch (err) {
+      setError(err);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  // FIXME: Add function to get movie details by querying OMDB API using imdbId as query parameter.
-  const getOneMovie = (id) => {
-    setIsSearch(false);
-    request(() => movieService.fetchOneMovie(id), setMovieDetails);
-  };
-
-  const searchMovies = (query) => {
+  const searchMovies = async (query) => {
+    setLoading(true);
     setIsSearch(true);
-    request(() => movieService.searchMovies(query), setSearchResults);
+    try {
+      const data = await movieService.searchMovies(query);
+      setSearchResults(data);
+    } catch (err) {
+      setError(err);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const addMovie = (movieData) =>
-    request(() => movieService.addMovie(movieData), setMovies);
+  const addMovie = async (movieData) => {
+    try {
+      const data = await movieService.addMovie(movieData);
+      // appends new movie to the rest of the movie list using the rest operator
+      setMovies((prevMovies) => [...prevMovies, data]);
+    } catch (err) {
+      setError(err);
+    }
+  };
 
-  const updateMovie = (id, updateData) =>
-    request(() => movieService.updateMovie(id, updateData));
+  const updateMovie = async (id, updateData) => {
+    try {
+      await movieService.updateMovie(id, updateData);
+      setMovies((prevMovies) =>
+        prevMovies.map((movie) =>
+          movie._id === id ? { ...movie, ...updateData } : movie,
+        ),
+      );
+    } catch (err) {
+      setError(err);
+    }
+  };
 
-  const deleteMovie = (id) =>
-    request(() => movieService.deleteMovie(id), getAllMovies);
+  const deleteMovie = async (id) => {
+    try {
+      await movieService.deleteMovie(id);
+      setMovies((prevMovies) => prevMovies.filter((movie) => movie._id !== id));
+    } catch (err) {
+      setError(err);
+    }
+  };
 
   const resetSearch = () => {
     setIsSearch(false);

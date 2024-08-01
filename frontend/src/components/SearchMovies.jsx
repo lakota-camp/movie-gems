@@ -68,6 +68,7 @@ const SearchMoviesForm = () => {
 
     searchMovies(search);
     pageNavigate("/search/movies");
+    setSearch("");
   };
 
   return (

@@ -1,15 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const { query, body, param } = require('express-validator');
 const handleInputErrors = require('../middleware/InputError');
 const {
   validateId,
   validateMovieBody,
   validateWatchedUpdate,
   validateSearchQuery,
+  validateIdSearchQuery,
 } = require('../validation/movieValidation.js');
-
-// Extract common input validation functionality - more DRY
 
 const {
   createMovie,
@@ -18,10 +16,15 @@ const {
   updateMovie,
   deleteMovie,
   searchMovies,
+  fetchMovieDetails,
 } = require('../controllers/movie.controller.js');
 
 // Search for movie
 router.get('/search', validateSearchQuery, searchMovies);
+
+// FIXME: add route to get movie details by IMDB id
+// // Fetch movie details using IMDB Id
+// router.get('/:id', validateIdSearchQuery, fetchMovieDetails);
 
 // * Movie CRUD API Routes * //
 

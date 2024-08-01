@@ -115,6 +115,23 @@ const searchMovies = async (req, res) => {
   }
 };
 
+const fetchMovieDetails = async (req, res) => {
+  const { id } = req.query;
+  console.log('query id:', id);
+  if (!id) {
+    return res.status(400).json({ error: 'Id query param required.' });
+  }
+
+  try {
+    const movie = await movieService.fetchMovieDetails(id);
+    console.log('Movie from IMDB search:', movie);
+    res.status(200).json(movie);
+  } catch (error) {
+    console.error('Error fetching movie using IMDB Id: ', error.message);
+    res.status(500).json({ error: 'failed to search for title' });
+  }
+};
+
 module.exports = {
   createMovie,
   getAllMovies,

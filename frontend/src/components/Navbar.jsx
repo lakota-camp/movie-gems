@@ -2,45 +2,69 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Grid";
 import SearchMoviesForm from "./SearchMovies";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useMovies } from "../context/MovieContext";
+import Button from "@mui/material/Button";
+import { BsGem } from "react-icons/bs";
 
-// !!!FIX render and data fetching issue Search results -> User Movies list => MOVIES NOT rendered and errors occur
-
-const Navbar = ({ title, movieList }) => {
+const Navbar = ({ title, myMovies }) => {
   const navigate = useNavigate();
   const { resetSearch } = useMovies();
 
-  // Handles state when navigating back to user movie list
-  const handleNavigateToMovies = () => {
+  const handleNavigateToMovies = (e) => {
+    e.preventDefault();
     resetSearch();
     navigate("/user/movies");
+  };
+
+  const handleNavigateHome = (e) => {
+    e.preventDefault();
+    resetSearch();
+    navigate("/");
   };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <Typography
-            variant="h4"
-            component="div"
-            sx={{ flexGrow: 1, marginLeft: 10, padding: 3 }}
-          >
-            <Link to="/" onClick={resetSearch}>
-              {title}
-            </Link>
-          </Typography>
-          <Typography
-            variant="h4"
-            component="div"
-            sx={{ flexGrow: 1, marginLeft: 10, padding: 3 }}
-          >
-            <Link to="/user/movies" navigate={handleNavigateToMovies}>
-              {movieList}
-            </Link>
-          </Typography>
-          <SearchMoviesForm />
+          <Grid container alignItems="center" sx={{ padding: 2 }}>
+            <Grid item xs={2}>
+              <Typography
+                variant="h4"
+                component="div"
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                <Button
+                  to="/"
+                  onClick={handleNavigateHome}
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  {/* <BsGem /> */}
+                  {title}
+                </Button>
+              </Typography>
+            </Grid>
+            <Grid
+              item
+              xs={8}
+              sx={{ display: "flex", justifyContent: "center" }}
+            >
+              <Button
+                onClick={handleNavigateToMovies}
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
+                {myMovies}
+              </Button>
+            </Grid>
+            <Grid item xs={2}>
+              <SearchMoviesForm />
+            </Grid>
+          </Grid>
         </Toolbar>
       </AppBar>
     </Box>

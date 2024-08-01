@@ -106,6 +106,20 @@ class MovieService {
       return cachedMovie;
     }
   }
+
+  async fetchMovieDetails(imdbId) {
+    const response = await axios.get(
+      `http://www.omdbapi.com/?apikey=${apiKey}&i=${imdbId}`,
+    );
+
+    const movie = response.data;
+
+    if (movie.Response === 'False') {
+      throw new Error('Movie not found.');
+    }
+
+    return movie;
+  }
 }
 
 module.exports = new MovieService();

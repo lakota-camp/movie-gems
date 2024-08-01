@@ -10,21 +10,19 @@ import Home from "./pages/Home";
 import Navbar from "./components/Navbar";
 import MovieSearch from "./pages/MovieSearch";
 import UserMovies from "./pages/UserMovies";
-import Footer from "./components/Footer";
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <MovieProvider>
-        <Navbar title="Movie Gems" movieList="My Movies" />
+        <Navbar title="Home" myMovies="My Movies" />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/user/movies/details/:id" element={<MovieDetails />} />
           <Route path="/user/movies" element={<UserMovies />} />
           <Route path="/search/movies" element={<MovieSearch />} />
         </Routes>
-        <Footer />
       </MovieProvider>
     </ThemeProvider>
   );
