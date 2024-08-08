@@ -38,7 +38,7 @@ const MovieCard = ({ movie, isSearch }) => {
   return (
     <>
       <Card elevation={10} sx={{ maxWidth: 345 }}>
-        <Link to={`/user/movies/details/${movie._id}`}>
+        <Link to={`/user/movies/details/${movie.imdbID}`}>
           <CardMedia
             sx={{ height: 500 }}
             image={movie.Poster}

@@ -23,8 +23,8 @@ const {
 router.get('/search', validateSearchQuery, searchMovies);
 
 // FIXME: add route to get movie details by IMDB id
-// // Fetch movie details using IMDB Id
-// router.get('/:id', validateIdSearchQuery, fetchMovieDetails);
+// Fetch movie details using IMDB Id
+router.get('/details/:id', validateIdSearchQuery, fetchMovieDetails);
 
 // * Movie CRUD API Routes * //
 

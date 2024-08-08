@@ -14,6 +14,13 @@ export const fetchOneMovie = async (id) => {
   return response.data;
 };
 
+export const fetchMovieDetails = async (id) => {
+  console.log("fetchMovieDetails from MovieService triggered!");
+  const response = await axios.get(`${url}/${endpoint}/details/${id}`);
+  console.log("Fetched movie details from MovieService:", response.data);
+  return response.data;
+};
+
 export const searchMovies = async (query) => {
   const response = await axios.get(`${url}/${endpoint}/search?title=${query}`);
   return response.data;

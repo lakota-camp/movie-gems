@@ -1,4 +1,4 @@
-import { useState, createContext, useContext } from "react";
+import { useState, createContext, useContext, useEffect } from "react";
 import * as movieService from "./MovieService";
 
 // Create context
@@ -40,6 +40,28 @@ export const MovieProvider = ({ children }) => {
       setLoading(false);
     }
   };
+
+  const getMovieDetails = async (id) => {
+    console.log("getMovieDetails from MovieContext triggered!");
+    setLoading(true);
+    setIsSearch(false);
+    try {
+      const data = await movieService.fetchMovieDetails(id);
+      setMovieDetails(data); // This schedules an update for the next render
+      console.log("data fetched from MovieService:", data); // Log the fetched data
+    } catch (err) {
+      setError(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // log when movieDetails changes, add this in your MovieProvider component
+  useEffect(() => {
+    if (movieDetails) {
+      console.log("movieDetails updated:", movieDetails);
+    }
+  }, [movieDetails]);
 
   const searchMovies = async (query) => {
     setLoading(true);
@@ -107,6 +129,7 @@ export const MovieProvider = ({ children }) => {
         isSearch,
         movieDetails,
         resetSearch,
+        getMovieDetails,
       }}
     >
       {children}

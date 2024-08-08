@@ -3,20 +3,14 @@ import { useEffect } from "react";
 import { useMovies } from "../context/MovieContext";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { Container } from "@mui/material";
-import Box from "@mui/material/Box";
-
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
 
 const MovieDetails = () => {
   const { id } = useParams();
-  const { getOneMovie, movieDetails, loading, error } = useMovies();
+  const { getMovieDetails, movieDetails, error, loading } = useMovies();
 
   useEffect(() => {
-    getOneMovie(id);
-  }, []);
+    getMovieDetails(id);
+  }, [id]);
 
   if (loading) {
     return <LoadingSpinner />;
@@ -29,39 +23,32 @@ const MovieDetails = () => {
   if (!movieDetails) {
     return <h2>No Movie Found</h2>;
   }
-  // FIXME: Add function to get movie details by querying OMDB API using imdbId as query parameter.
+  // Data is correctly displaying -> FIXME: Style data for details
   return (
     <div>
       <Container maxWidth="sm">
-        <Box sx={{ padding: "5rem", margin: "1rem" }}>
-          <Card>
-            <CardMedia
-              sx={{ height: 500 }}
-              image={movieDetails.Poster}
-              title={movieDetails.Title}
-              id={movieDetails._id}
-            />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                {movieDetails.Title}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Id: {id}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                imdbID: {movieDetails.imdbID}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Movie details will go here. Fetch from OMDB api using IMDB id to
-                get movie details
-              </Typography>
-            </CardContent>
-            {/* <CardActions>
-            <Button size="small">Share</Button>
-            <Button size="small">Learn More</Button>
-          </CardActions> */}
-          </Card>
-        </Box>
+        <h3>Details</h3>
+        <ul>
+          <li>Param id: {id}</li>
+          <li>Title: {movieDetails.Title}</li>
+          <li>Plot: {movieDetails.Plot}</li>
+          <li>Director: {movieDetails.Director}</li>
+          <li>Rated: {movieDetails.Rated}</li>
+          <li>Released: {movieDetails.Year}</li>
+          <li>Actors: {movieDetails.Actors}</li>
+          <li>Box Office: {movieDetails.BoxOffice}</li>
+          <li>Awards: {movieDetails.Awards}</li>
+          <li>imdbRating: {movieDetails.imdbRating} / 10</li>
+        </ul>
+        <h3>Ratings</h3>
+        <ul>
+          {movieDetails.Ratings.map((rating, index) => (
+            <li key={index}>
+              {rating.Source}: {rating.Value}
+            </li>
+          ))}
+        </ul>
+        <img src={movieDetails.Poster} alt={movieDetails.Title} />
       </Container>
     </div>
   );

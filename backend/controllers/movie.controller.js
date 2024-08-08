@@ -116,7 +116,9 @@ const searchMovies = async (req, res) => {
 };
 
 const fetchMovieDetails = async (req, res) => {
-  const { id } = req.query;
+  const { id } = req.params;
+  console.log('id:', id);
+
   console.log('query id:', id);
   if (!id) {
     return res.status(400).json({ error: 'Id query param required.' });
@@ -139,4 +141,5 @@ module.exports = {
   updateMovie,
   deleteMovie,
   searchMovies,
+  fetchMovieDetails,
 };
