@@ -3,10 +3,12 @@ import { useEffect } from "react";
 import { useMovies } from "../context/MovieContext";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { Container } from "@mui/material";
+import ButtonMain from "../components/Button";
 
-const MovieDetails = () => {
+const MovieDetails = ({ isSearch }) => {
   const { id } = useParams();
-  const { getMovieDetails, movieDetails, error, loading } = useMovies();
+  const { addMovie, getMovieDetails, movieDetails, error, loading } =
+    useMovies();
 
   useEffect(() => {
     getMovieDetails(id);
@@ -23,6 +25,20 @@ const MovieDetails = () => {
   if (!movieDetails) {
     return <h2>No Movie Found</h2>;
   }
+  isSearch = true;
+  // Function to handle update event
+  const handleAdd = (e) => {
+    e.preventDefault();
+    const movieData = {
+      Title: movieDetails.Title,
+      Year: movieDetails.Year,
+      imdbID: movieDetails.imdbID,
+      Poster: movieDetails.Poster,
+      Type: movieDetails.Type,
+    };
+    addMovie(movieData);
+  };
+
   // Data is correctly displaying -> FIXME: Style data for details
   return (
     <div>
@@ -49,6 +65,19 @@ const MovieDetails = () => {
           ))}
         </ul>
         <img src={movieDetails.Poster} alt={movieDetails.Title} />
+        <div>
+          {/* Dynamically updates button choices based on user movies or search results */}
+          {isSearch ? (
+            <ButtonMain
+              onClick={handleAdd}
+              variant="contained"
+              text="Add to Watch list"
+              color="primary"
+            />
+          ) : (
+            <></>
+          )}
+        </div>
       </Container>
     </div>
   );

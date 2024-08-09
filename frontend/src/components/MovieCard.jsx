@@ -4,6 +4,8 @@ import { Card } from "@mui/material";
 import CardActions from "@mui/material/CardActions";
 import CardMedia from "@mui/material/CardMedia";
 import { Link } from "react-router-dom";
+import MovieModal from "./MovieDetailsModal";
+
 // import Typography from "@mui/material/Typography";
 
 const MovieCard = ({ movie, isSearch }) => {
@@ -34,7 +36,6 @@ const MovieCard = ({ movie, isSearch }) => {
     };
     addMovie(movieData);
   };
-
   return (
     <>
       <Card elevation={10} sx={{ maxWidth: 345 }}>
@@ -56,12 +57,15 @@ const MovieCard = ({ movie, isSearch }) => {
         >
           {/* Dynamically updates button choices based on user movies or search results */}
           {isSearch ? (
-            <ButtonMain
-              onClick={handleAdd}
-              variant="contained"
-              text="Add to Watch list"
-              color="primary"
-            />
+            <>
+              <ButtonMain
+                onClick={handleAdd}
+                variant="contained"
+                text="Add to Watch list"
+                color="primary"
+              />
+              {/* <MovieModal imdbID={movie.imdbID} /> */}
+            </>
           ) : (
             <>
               <ButtonMain
@@ -76,6 +80,8 @@ const MovieCard = ({ movie, isSearch }) => {
                 text="Delete"
                 color="secondary"
               />
+              {/* FIXME: Bug when opening modal... data is fetched properly but trouble with modal opening... */}
+              {/* <MovieModal imdbID={movie.imdbID} /> */}
             </>
           )}
         </CardActions>

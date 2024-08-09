@@ -2,7 +2,6 @@ import MovieGrid from "../components/MovieGrid";
 import { Container } from "@mui/material";
 import { useMovies } from "../context/MovieContext";
 import { useEffect } from "react";
-
 const UserMovies = () => {
   const { resetSearch } = useMovies();
 

@@ -15,6 +15,7 @@ import UserMovies from "./pages/UserMovies";
 // FIXME: Change movie details in search to include a "add movie" option - separate state
 // !FIXME: MAJOR BUG: when search results in no movie (e.g. bad typo), error message displays, fix to -> 'No movies found'
 // !FIXME: MAJOR BUG: when no results found from search, Navigation back to "My Movies" does not work -> fix this!!! -> reset state when clicking back to "Home" or "My Movies"
+// FIXME: Future update - allow users to browse movies be specific categories
 
 function App() {
   return (
