@@ -4,7 +4,6 @@ import { Card } from "@mui/material";
 import CardActions from "@mui/material/CardActions";
 import CardMedia from "@mui/material/CardMedia";
 import { Link } from "react-router-dom";
-import MovieModal from "./MovieDetailsModal";
 
 // import Typography from "@mui/material/Typography";
 
