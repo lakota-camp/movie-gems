@@ -20,7 +20,7 @@ const Home = () => {
             textAlign: "center",
           }}
         >
-          <Typography variant="h2">Welcome to MovieGems </Typography>
+          <Typography variant="h2">Welcome to MovieGems</Typography>
           <Box
             component="section"
             sx={{

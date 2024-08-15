@@ -1,10 +1,36 @@
 import Alert from "@mui/material/Alert";
-import CheckIcon from "@mui/icons-material/Check";
+import Box from "@mui/material/Box";
+import IconButton from "@mui/material/IconButton";
+import Collapse from "@mui/material/Collapse";
+import CloseIcon from "@mui/icons-material/Close";
+import { useState } from "react";
 
-export default function SuccessAlert() {
+export default function SuccessAlert({ message }) {
+  const [open, setOpen] = useState(true);
+
   return (
-    <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
-      Here is a gentle confirmation that your action was successful.
-    </Alert>
+    <>
+      <Box sx={{ width: "100%" }}>
+        <Collapse in={open}>
+          <Alert
+            action={
+              <IconButton
+                aria-label="close"
+                color="inherit"
+                size="small"
+                onClick={() => {
+                  setOpen(false);
+                }}
+              >
+                <CloseIcon fontSize="inherit" />
+              </IconButton>
+            }
+            sx={{ mb: 2 }}
+          >
+            {message}
+          </Alert>
+        </Collapse>
+      </Box>
+    </>
   );
 }

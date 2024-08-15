@@ -1,18 +1,19 @@
-import MovieGrid from "../components/MovieGrid";
 import { Container } from "@mui/material";
 import { useMovies } from "../context/MovieContext";
 import { useEffect } from "react";
+import UserMovieGrid from "../components/UserMovieGrid";
 const UserMovies = () => {
-  const { resetSearch } = useMovies();
+  const { getAllMovies, resetSearch } = useMovies();
 
   useEffect(() => {
     resetSearch();
+    getAllMovies();
   }, []);
 
   return (
     <>
       <Container maxWidth="xxl">
-        <MovieGrid isSearch={false} />
+        <UserMovieGrid />
       </Container>
     </>
   );

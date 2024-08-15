@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useMovies } from "../context/MovieContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
@@ -57,17 +57,19 @@ const SearchMoviesForm = () => {
   const { searchMovies, loading, error } = useMovies();
 
   const pageNavigate = useNavigate();
+  const [, setSearchParams] = useSearchParams();
 
   const [search, setSearch] = useState("");
 
   const handleSearch = (e) => {
     e.preventDefault();
+    // Check if input is blank
     if (!search.trim()) {
       return;
     }
-
+    setSearchParams({ query: search });
     searchMovies(search);
-    pageNavigate("/search/movies");
+    pageNavigate(`/search/movies?query=${search}`);
     setSearch("");
   };
 

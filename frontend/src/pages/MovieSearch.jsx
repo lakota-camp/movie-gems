@@ -1,4 +1,4 @@
-import MovieGrid from "../components/MovieGrid";
+import SearchResultGrid from "../components/SearchResultGrid";
 import { useMovies } from "../context/MovieContext";
 import { Container } from "@mui/material";
 
@@ -7,7 +7,7 @@ const MovieSearch = () => {
   return (
     <>
       <Container maxWidth="xxl">
-        <MovieGrid movies={searchResults} isSearch={true} />
+        <SearchResultGrid movies={searchResults} />
       </Container>
     </>
   );

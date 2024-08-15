@@ -1,35 +1,21 @@
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
 import { useEffect } from "react";
 import { useMovies } from "../context/MovieContext";
+
+// Components
 import MovieCard from "./MovieCard";
 import LoadingSpinner from "./LoadingSpinner";
 import ErrorMessage from "./ErrorMessage";
-import Container from "@mui/material/Container";
+import { Container, Grid, Box } from "@mui/material";
 
-const MovieGrid = () => {
-  const { movies, searchResults, loading, error, getAllMovies, isSearch } =
-    useMovies();
+const UserMovieGrid = () => {
+  const { movies, loading, error, getAllMovies } = useMovies();
 
   useEffect(() => {
-    if (!isSearch && movies.length === 0) {
-      getAllMovies();
-    }
-  }, [isSearch, movies.length, getAllMovies]);
+    getAllMovies();
+  }, []);
 
   if (loading) return <LoadingSpinner />;
   if (error) return <ErrorMessage />;
-
-  let movieList = isSearch ? searchResults : movies;
-
-  // Ensure movieList is always an array
-  if (!Array.isArray(movieList)) {
-    movieList = Object.values(movieList);
-  }
-
-  if (!Array.isArray(movieList)) {
-    movieList = [];
-  }
 
   return (
     <Container maxWidth="xxl">
@@ -40,8 +26,7 @@ const MovieGrid = () => {
           columnSpacing={{ xs: 1, sm: 1, md: 1, lg: 1, xl: 1 }}
           justifyContent="center"
         >
-          {/* FIXME: Error with mapping over movies: TypeError: movieList.map is not a function */}
-          {movieList.map((movie) => (
+          {movies.map((movie) => (
             <Grid
               item
               xs={12}
@@ -50,7 +35,7 @@ const MovieGrid = () => {
               lg={3}
               key={movie._id || movie.imdbID}
             >
-              <MovieCard movie={movie} isSearch={isSearch} />
+              <MovieCard movie={movie} />
             </Grid>
           ))}
         </Grid>
@@ -59,4 +44,4 @@ const MovieGrid = () => {
   );
 };
 
-export default MovieGrid;
+export default UserMovieGrid;

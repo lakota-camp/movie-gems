@@ -45,27 +45,21 @@ class MovieService {
         `http://www.omdbapi.com/?apikey=${apiKey}&s=${title}`,
       );
 
+      // Check that error is OMDB error
+      if (response.status !== 200) {
+        throw new Error(`OMDB API error: ${response.status}`);
+      }
+
       // Response from API
       const movies = response.data;
 
       if (movies.Response === 'False') {
-        throw new Error('Movie not found.');
+        console.error('Error searching for movies:', error.message);
+        throw new Error('Failed to search for movies.');
       }
 
       // Cache the search results
       myCache.set(title, movies.Search);
-
-      // // If movie found in from API -> Add movie to DB
-      // const newMovie = new Movie({
-      //   title: movies.Title,
-      //   year: movies.Year,
-      //   runtime: movies.Runtime,
-      //   genre: movies.Genre,
-      //   director: movies.Director,
-      //   actors: movies.Actors,
-      //   description: movies.Plot,
-      //   poster: movies.Poster,
-      // });
 
       return movies.Search;
     } else {

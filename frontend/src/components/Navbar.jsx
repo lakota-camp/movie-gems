@@ -7,7 +7,6 @@ import SearchMoviesForm from "./SearchMovies";
 import { useNavigate } from "react-router-dom";
 import { useMovies } from "../context/MovieContext";
 import Button from "@mui/material/Button";
-import { BsGem } from "react-icons/bs";
 
 const Navbar = ({ title, myMovies }) => {
   const navigate = useNavigate();
@@ -44,7 +43,6 @@ const Navbar = ({ title, myMovies }) => {
                   onClick={handleNavigateHome}
                   style={{ textDecoration: "none", color: "inherit" }}
                 >
-                  {/* <BsGem /> */}
                   {title}
                 </Button>
               </Typography>

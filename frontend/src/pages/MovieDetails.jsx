@@ -2,7 +2,6 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useMovies } from "../context/MovieContext";
 import LoadingSpinner from "../components/LoadingSpinner";
-import ButtonMain from "../components/Button";
 import {
   Container,
   Box,
@@ -13,10 +12,9 @@ import {
   CardContent,
 } from "@mui/material";
 
-const MovieDetails = ({ isSearch }) => {
+const MovieDetails = () => {
   const { id } = useParams();
-  const { addMovie, getMovieDetails, movieDetails, error, loading } =
-    useMovies();
+  const { getMovieDetails, movieDetails, error, loading } = useMovies();
 
   useEffect(() => {
     getMovieDetails(id);
@@ -34,21 +32,6 @@ const MovieDetails = ({ isSearch }) => {
     return <h2>No Movie Found</h2>;
   }
 
-  // isSearch = true;
-  // // Function to handle update event
-  // const handleAdd = (e) => {
-  //   e.preventDefault();
-  //   const movieData = {
-  //     Title: movieDetails.Title,
-  //     Year: movieDetails.Year,
-  //     imdbID: movieDetails.imdbID,
-  //     Poster: movieDetails.Poster,
-  //     Type: movieDetails.Type,
-  //   };
-  //   addMovie(movieData);
-  // };
-
-  // Data is correctly displaying -> FIXME: Style data for details
   return (
     <div>
       <Container

@@ -4,11 +4,14 @@ import { Card } from "@mui/material";
 import CardActions from "@mui/material/CardActions";
 import CardMedia from "@mui/material/CardMedia";
 import { Link } from "react-router-dom";
+import SuccessAlert from "./SuccessAlert";
+import { useState } from "react";
 
 // import Typography from "@mui/material/Typography";
 
 const MovieCard = ({ movie, isSearch }) => {
   const { addMovie, deleteMovie, updateMovie } = useMovies();
+  const [movieAdded, setMovieAdded] = useState(false);
 
   // Function to handle delete event
   const handleDelete = (e) => {
@@ -23,7 +26,7 @@ const MovieCard = ({ movie, isSearch }) => {
     updateMovie(movie._id, updateData);
   };
 
-  // Function to handle update event
+  // Function to handle add event
   const handleAdd = (e) => {
     e.preventDefault();
     const movieData = {
@@ -34,9 +37,14 @@ const MovieCard = ({ movie, isSearch }) => {
       Type: movie.Type,
     };
     addMovie(movieData);
+
+    setMovieAdded(true);
+
+    setTimeout(() => setMovieAdded(false), 3000);
   };
   return (
     <>
+      {movieAdded && <SuccessAlert message="Movie added to watch list" />}
       <Card elevation={10} sx={{ maxWidth: 345 }}>
         <Link to={`/user/movies/details/${movie.imdbID}`}>
           <CardMedia
