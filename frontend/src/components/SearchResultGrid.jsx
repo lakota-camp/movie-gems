@@ -6,6 +6,7 @@ import MovieCard from "./MovieCard";
 import LoadingSpinner from "./LoadingSpinner";
 import ErrorMessage from "./ErrorMessage";
 import { Container, Grid, Box } from "@mui/material";
+import NoMoviesFound from "./NoMoviesFound";
 
 const SearchResultGrid = () => {
   const { searchResults, searchMovies, loading, error } = useMovies();
@@ -20,7 +21,7 @@ const SearchResultGrid = () => {
 
   if (loading) return <LoadingSpinner />;
   if (error) return <ErrorMessage />;
-  if (searchResults.length === 0) return <p>No movies found.</p>;
+  if (searchResults.length === 0) return <NoMoviesFound />;
 
   return (
     <Container maxWidth="xxl">

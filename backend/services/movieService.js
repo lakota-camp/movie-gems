@@ -54,7 +54,7 @@ class MovieService {
       const movies = response.data;
 
       if (movies.Response === 'False') {
-        console.error('Error searching for movies:', error.message);
+        console.error('Error searching for movies: Movie not found.');
         throw new Error('Failed to search for movies.');
       }
 

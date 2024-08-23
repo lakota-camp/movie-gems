@@ -43,11 +43,3 @@ connectDB();
 app.listen(port, () => {
   console.log(`Server is running on http://${host}:${port}`);
 });
-
-// ____________________________________________________________
-// Future updates:
-// // User (public route)
-// app.use('/api/user', userRoute);
-
-// // Admin routes (protected route)
-// app.use('/api/admin', adminRoute);

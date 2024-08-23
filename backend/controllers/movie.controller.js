@@ -89,9 +89,7 @@ const deleteMovie = async (req, res) => {
 // Search OMDB API for movie
 const searchMovies = async (req, res) => {
   // Destructure title from query parameter
-  const { title, type } = req.query;
-  console.log('Search title:', title);
-  // console.log('Search type:', type);
+  const { title } = req.query;
 
   // Check to see if title exists in query parameter
   if (!title) {
@@ -100,17 +98,17 @@ const searchMovies = async (req, res) => {
       .json({ error: 'Title query parameter is required.' });
   }
 
-  // if (!type) {
-  //   return res.status(400).json({ error: 'Type query parameter is required.' });
-  // }
-
   try {
     const movie = await movieService.searchMovies(title);
-    console.log(movie);
+
+    if (!movie) {
+      console.log('Movie not found.');
+      return res.status(404).json({ message: 'Movie not found' });
+    }
 
     res.status(200).json(movie);
   } catch (error) {
-    console.error('Error fetching title:', error.message);
+    console.error('movie.controller.js - Error fetching title:', error.message);
     res.status(500).json({ error: 'Failed search for title.' });
   }
 };

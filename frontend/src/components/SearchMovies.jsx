@@ -7,7 +7,6 @@ import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 
 import LoadingSpinner from "./LoadingSpinner";
-import ErrorMessage from "./ErrorMessage";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -54,7 +53,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 // ADD snackbar to notify user input can't be blank
 
 const SearchMoviesForm = () => {
-  const { searchMovies, loading, error } = useMovies();
+  const { searchMovies, loading } = useMovies();
 
   const pageNavigate = useNavigate();
   const [, setSearchParams] = useSearchParams();
@@ -89,7 +88,6 @@ const SearchMoviesForm = () => {
         </Search>
       </form>
       {loading && <LoadingSpinner />}
-      {error && <ErrorMessage />}
     </>
   );
 };

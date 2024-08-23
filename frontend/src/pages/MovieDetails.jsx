@@ -12,6 +12,7 @@ import {
   CardContent,
 } from "@mui/material";
 
+// !FIXME Add button to add movie to watch list from movie details section
 const MovieDetails = () => {
   const { id } = useParams();
   const { getMovieDetails, movieDetails, error, loading } = useMovies();
@@ -33,7 +34,8 @@ const MovieDetails = () => {
   }
 
   return (
-    <div>
+    <>
+      {/* Text Box */}
       <Container
         maxWidth="lg"
         sx={{
@@ -89,7 +91,6 @@ const MovieDetails = () => {
             </Typography>
           </CardContent>
         </Card>
-        {/* Text Box */}
 
         {/* Image box */}
         <Box
@@ -117,7 +118,7 @@ const MovieDetails = () => {
           />
         </Box>
       </Container>
-    </div>
+    </>
   );
 };
 

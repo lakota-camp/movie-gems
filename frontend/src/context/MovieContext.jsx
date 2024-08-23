@@ -16,6 +16,8 @@ export const MovieProvider = ({ children }) => {
   const [isSearch, setIsSearch] = useState(false);
 
   const getAllMovies = async () => {
+    // Reset error to allow movies to load after error happens
+    setError(null);
     setLoading(true);
     setIsSearch(false);
     try {
@@ -68,9 +70,18 @@ export const MovieProvider = ({ children }) => {
     setIsSearch(true);
     try {
       const data = await movieService.searchMovies(query);
-      setSearchResults(data);
+
+      if (data.error || data.message) {
+        setError(data.message || data.error);
+        setSearchResults([]);
+      } else {
+        setSearchResults(data);
+        setError(null);
+      }
     } catch (err) {
-      setError(err);
+      setError(err.message || "An unexpected error occurred.");
+      setSearchResults([]); // Clear search results on error
+      await getAllMovies(); // Reload the user's movie list after error
     } finally {
       setLoading(false);
     }

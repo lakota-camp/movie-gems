@@ -23,9 +23,15 @@ export const fetchMovieDetails = async (id) => {
 
 export const searchMovies = async (query) => {
   const response = await axios.get(`${url}/${endpoint}/search?title=${query}`);
+
+  if (response.status === 404) {
+    return { message: "Movie Not Found." };
+  }
+
   if (!response || !Array.isArray(response.data)) {
     return [];
   }
+
   return response.data;
 };
 
