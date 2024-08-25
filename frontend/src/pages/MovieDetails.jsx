@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useMovies } from "../context/MovieContext";
-import LoadingSpinner from "../components/LoadingSpinner";
 import {
   Container,
   Box,
@@ -10,6 +9,7 @@ import {
   ListItem,
   Card,
   CardContent,
+  Skeleton,
 } from "@mui/material";
 
 // !FIXME Add button to add movie to watch list from movie details section
@@ -22,7 +22,36 @@ const MovieDetails = () => {
   }, [id]);
 
   if (loading) {
-    return <LoadingSpinner />;
+    return (
+      <Container
+        maxWidth="lg"
+        sx={{
+          marginTop: "4rem",
+          marginBottom: "2rem",
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          // border: "solid red",
+        }}
+      >
+        <Skeleton
+          variant="rectangular"
+          width={600}
+          height={600}
+          sx={{
+            marginX: "2rem",
+          }}
+        />
+        <Skeleton
+          variant="rectangular"
+          width={400}
+          height={500}
+          sx={{
+            marginX: "4rem",
+          }}
+        />
+      </Container>
+    );
   }
 
   if (error) {

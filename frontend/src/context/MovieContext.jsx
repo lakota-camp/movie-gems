@@ -26,7 +26,8 @@ export const MovieProvider = ({ children }) => {
     } catch (err) {
       setError(err);
     } finally {
-      setLoading(false);
+      // setTimeout to ensure loading is smooth
+      setTimeout(() => setLoading(false), 100);
     }
   };
 

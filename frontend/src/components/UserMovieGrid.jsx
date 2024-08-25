@@ -3,9 +3,9 @@ import { useMovies } from "../context/MovieContext";
 
 // Components
 import MovieCard from "./MovieCard";
-import LoadingSpinner from "./LoadingSpinner";
 import ErrorMessage from "./ErrorMessage";
 import { Container, Grid, Box } from "@mui/material";
+import MovieGridSkeleton from "./MovieGridSkeleton";
 
 const UserMovieGrid = () => {
   const { movies, loading, error, getAllMovies } = useMovies();
@@ -14,7 +14,7 @@ const UserMovieGrid = () => {
     getAllMovies();
   }, []);
 
-  if (loading) return <LoadingSpinner />;
+  if (loading) return <MovieGridSkeleton />;
   if (error) return <ErrorMessage />;
 
   return (

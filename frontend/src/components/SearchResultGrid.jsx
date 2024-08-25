@@ -7,6 +7,7 @@ import LoadingSpinner from "./LoadingSpinner";
 import ErrorMessage from "./ErrorMessage";
 import { Container, Grid, Box } from "@mui/material";
 import NoMoviesFound from "./NoMoviesFound";
+import MovieGridSkeleton from "./MovieGridSkeleton";
 
 const SearchResultGrid = () => {
   const { searchResults, searchMovies, loading, error } = useMovies();
@@ -19,7 +20,7 @@ const SearchResultGrid = () => {
     }
   }, []);
 
-  if (loading) return <LoadingSpinner />;
+  if (loading) return <MovieGridSkeleton />;
   if (error) return <ErrorMessage />;
   if (searchResults.length === 0) return <NoMoviesFound />;
 
