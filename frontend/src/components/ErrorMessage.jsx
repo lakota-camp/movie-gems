@@ -1,7 +1,7 @@
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 
-const ErrorMessage = () => {
+const ErrorMessage = ({ message }) => {
   return (
     <Stack
       sx={{
@@ -9,7 +9,7 @@ const ErrorMessage = () => {
       }}
       spacing={2}
     >
-      <Alert severity="error">Error Loading Movies</Alert>
+      <Alert severity="error">{message}</Alert>
     </Stack>
   );
 };

@@ -15,7 +15,7 @@ const UserMovieGrid = () => {
   }, []);
 
   if (loading) return <MovieGridSkeleton />;
-  if (error) return <ErrorMessage />;
+  if (error) return <ErrorMessage message="Error loading movies." />;
 
   return (
     <Container maxWidth="xxl">

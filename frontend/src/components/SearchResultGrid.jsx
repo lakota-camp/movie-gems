@@ -3,7 +3,6 @@ import { useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
 // Components
 import MovieCard from "./MovieCard";
-import LoadingSpinner from "./LoadingSpinner";
 import ErrorMessage from "./ErrorMessage";
 import { Container, Grid, Box } from "@mui/material";
 import NoMoviesFound from "./NoMoviesFound";
@@ -21,7 +20,7 @@ const SearchResultGrid = () => {
   }, []);
 
   if (loading) return <MovieGridSkeleton />;
-  if (error) return <ErrorMessage />;
+  if (error) return <ErrorMessage message="Error loading movies." />;
   if (searchResults.length === 0) return <NoMoviesFound />;
 
   return (

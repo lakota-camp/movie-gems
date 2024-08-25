@@ -1,6 +1,6 @@
 import { useState, createContext, useContext, useEffect } from "react";
 import * as movieService from "./MovieService";
-
+import useLoading from "../hooks/useLoading";
 // Create context
 const MovieContext = createContext();
 
@@ -11,51 +11,51 @@ export const MovieProvider = ({ children }) => {
   const [movies, setMovies] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
   const [movieDetails, setMovieDetails] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+
   const [isSearch, setIsSearch] = useState(false);
+
+  const { loading, error, startLoading, stopLoading, handleError } =
+    useLoading();
 
   const getAllMovies = async () => {
     // Reset error to allow movies to load after error happens
-    setError(null);
-    setLoading(true);
+    handleError(null);
+    startLoading();
     setIsSearch(false);
     try {
       const data = await movieService.fetchMovies();
       setMovies(data);
     } catch (err) {
-      setError(err);
+      handleError(err);
     } finally {
       // setTimeout to ensure loading is smooth
-      setTimeout(() => setLoading(false), 100);
+      setTimeout(() => stopLoading(), 100);
     }
   };
 
   const getOneMovie = async (id) => {
-    setLoading(true);
+    startLoading();
     setIsSearch(false);
     try {
       const data = await movieService.fetchOneMovie(id);
       setMovieDetails(data);
     } catch (err) {
-      setError(err);
+      handleError(err);
     } finally {
-      setLoading(false);
+      stopLoading();
     }
   };
 
   const getMovieDetails = async (id) => {
-    console.log("getMovieDetails from MovieContext triggered!");
-    setLoading(true);
+    startLoading();
     setIsSearch(false);
     try {
       const data = await movieService.fetchMovieDetails(id);
       setMovieDetails(data); // This schedules an update for the next render
-      console.log("data fetched from MovieService:", data); // Log the fetched data
     } catch (err) {
-      setError(err);
+      handleError(err);
     } finally {
-      setLoading(false);
+      stopLoading();
     }
   };
 
@@ -67,24 +67,24 @@ export const MovieProvider = ({ children }) => {
   }, [movieDetails]);
 
   const searchMovies = async (query) => {
-    setLoading(true);
+    startLoading();
     setIsSearch(true);
     try {
       const data = await movieService.searchMovies(query);
 
       if (data.error || data.message) {
-        setError(data.message || data.error);
+        handleError(data.message || data.error);
         setSearchResults([]);
       } else {
         setSearchResults(data);
-        setError(null);
+        handleError(null);
       }
     } catch (err) {
-      setError(err.message || "An unexpected error occurred.");
+      handleError(err.message || "An unexpected error occurred.");
       setSearchResults([]); // Clear search results on error
       await getAllMovies(); // Reload the user's movie list after error
     } finally {
-      setLoading(false);
+      stopLoading();
     }
   };
 
@@ -94,7 +94,7 @@ export const MovieProvider = ({ children }) => {
       // appends new movie to the rest of the movie list using the rest operator
       setMovies((prevMovies) => [...prevMovies, data]);
     } catch (err) {
-      setError(err);
+      handleError(err);
     }
   };
 
@@ -107,7 +107,7 @@ export const MovieProvider = ({ children }) => {
         ),
       );
     } catch (err) {
-      setError(err);
+      handleError(err);
     }
   };
 
@@ -116,7 +116,7 @@ export const MovieProvider = ({ children }) => {
       await movieService.deleteMovie(id);
       setMovies((prevMovies) => prevMovies.filter((movie) => movie._id !== id));
     } catch (err) {
-      setError(err);
+      handleError(err);
     }
   };
 
