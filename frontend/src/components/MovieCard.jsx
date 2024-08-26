@@ -1,6 +1,6 @@
 import { useMovies } from "../context/MovieContext";
 import ButtonMain from "./Button";
-import { Card } from "@mui/material";
+import { Card, CardContent, Rating } from "@mui/material";
 import CardActions from "@mui/material/CardActions";
 import CardMedia from "@mui/material/CardMedia";
 import { Link } from "react-router-dom";
@@ -54,12 +54,15 @@ const MovieCard = ({ movie, isSearch }) => {
             id={movie._id}
           />
         </Link>
+        <CardContent sx={{ textAlign: "center" }}>
+          <Rating name="size-small" defaultValue={0} sx={{ color: "white" }} />
+        </CardContent>
         <CardActions
           sx={{
             display: "flex",
             justifyContent: "space-evenly",
-            paddingBottom: 5,
-            paddingTop: 5,
+            paddingBottom: 4,
+            paddingTop: 1,
           }}
         >
           {/* Dynamically updates button choices based on user movies or search results */}

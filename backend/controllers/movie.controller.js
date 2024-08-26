@@ -26,6 +26,16 @@ const getAllMovies = async (req, res) => {
   }
 };
 
+// Read all watched movies
+const getAllWatchedMovies = async (req, res) => {
+  try {
+    const watchedMovies = await movieService.getAllWatchedMovies();
+    res.status(200).json(watchedMovies);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch watched movies.' });
+  }
+};
+
 // Get specific movie by ID
 const getMovieById = async (req, res) => {
   try {
@@ -135,6 +145,7 @@ const fetchMovieDetails = async (req, res) => {
 module.exports = {
   createMovie,
   getAllMovies,
+  getAllWatchedMovies,
   getMovieById,
   updateMovie,
   deleteMovie,

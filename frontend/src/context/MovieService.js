@@ -2,22 +2,23 @@ import axios from "axios";
 const url = "http://localhost:3000";
 const endpoint = "api/movies";
 
-// FIXME: Error with mapping over movies: TypeError: movieList.map is not a function
 export const fetchMovies = async () => {
   const response = await axios.get(`${url}/${endpoint}/`);
   return response.data;
 };
+export const fetchWatchedMovies = async () => {
+  const response = await axios.get(`${url}/${endpoint}/watched`);
+  console.log(response.data);
+  return response.data;
+};
 
-// FIXME: Add function to get movie details by querying OMDB API using imdbId as query parameter.
 export const fetchOneMovie = async (id) => {
   const response = await axios.get(`${url}/${endpoint}/${id}`);
   return response.data;
 };
 
 export const fetchMovieDetails = async (id) => {
-  console.log("fetchMovieDetails from MovieService triggered!");
   const response = await axios.get(`${url}/${endpoint}/details/${id}`);
-  console.log("Fetched movie details from MovieService:", response.data);
   return response.data;
 };
 

@@ -17,6 +17,7 @@ const {
   deleteMovie,
   searchMovies,
   fetchMovieDetails,
+  getAllWatchedMovies,
 } = require('../controllers/movie.controller.js');
 
 // Search for movie
@@ -33,6 +34,9 @@ router.post('/', validateMovieBody, handleInputErrors, createMovie);
 
 // Read all movies
 router.get('/', getAllMovies);
+
+// Read all watched movies
+router.get('/watched', getAllWatchedMovies);
 
 // Get movie by Id
 router.get('/:id', validateId, getMovieById);

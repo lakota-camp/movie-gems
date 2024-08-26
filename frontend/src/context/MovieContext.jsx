@@ -33,6 +33,22 @@ export const MovieProvider = ({ children }) => {
     }
   };
 
+  const getAllWatched = async () => {
+    // Reset error to allow movies to load after error happens
+    handleError(null);
+    startLoading();
+    setIsSearch(false);
+    try {
+      const data = await movieService.fetchWatchedMovies();
+      setMovies(data);
+    } catch (err) {
+      handleError(err);
+    } finally {
+      // setTimeout to ensure loading is smooth
+      setTimeout(() => stopLoading(), 100);
+    }
+  };
+
   const getOneMovie = async (id) => {
     startLoading();
     setIsSearch(false);
@@ -98,6 +114,7 @@ export const MovieProvider = ({ children }) => {
     }
   };
 
+  // !FIXME: Update state the remove movie from user list when marked at watched.
   const updateMovie = async (id, updateData) => {
     try {
       await movieService.updateMovie(id, updateData);
@@ -135,6 +152,7 @@ export const MovieProvider = ({ children }) => {
         searchMovies,
         addMovie,
         getAllMovies,
+        getAllWatched,
         getOneMovie,
         updateMovie,
         deleteMovie,

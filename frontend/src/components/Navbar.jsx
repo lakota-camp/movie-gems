@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useMovies } from "../context/MovieContext";
 import Button from "@mui/material/Button";
 
-const Navbar = ({ title, myMovies }) => {
+const Navbar = ({ title, myMovies, watchedMovies }) => {
   const navigate = useNavigate();
   const { resetSearch } = useMovies();
 
@@ -16,6 +16,12 @@ const Navbar = ({ title, myMovies }) => {
     e.preventDefault();
     resetSearch();
     navigate("/user/movies");
+  };
+
+  const handleNavigateToWatchedMovies = (e) => {
+    e.preventDefault();
+    resetSearch();
+    navigate("/user/movies/watched");
   };
 
   const handleNavigateHome = (e) => {
@@ -57,6 +63,12 @@ const Navbar = ({ title, myMovies }) => {
                 style={{ textDecoration: "none", color: "inherit" }}
               >
                 {myMovies}
+              </Button>
+              <Button
+                onClick={handleNavigateToWatchedMovies}
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
+                {watchedMovies}
               </Button>
             </Grid>
             <Grid item xs={2}>

@@ -17,7 +17,15 @@ class MovieService {
   }
 
   async getAllMovies() {
-    return await Movie.find({});
+    return await Movie.find({
+      Watched: false,
+    });
+  }
+
+  async getAllWatchedMovies() {
+    return await Movie.find({
+      Watched: true,
+    });
   }
 
   async getMovieById(id) {

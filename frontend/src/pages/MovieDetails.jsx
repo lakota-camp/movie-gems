@@ -11,6 +11,7 @@ import {
   CardContent,
 } from "@mui/material";
 import SkeletonMovieDetails from "../components/SkeletonMovieDetails";
+import NoMoviesFound from "../components/NoMoviesFound";
 
 // !FIXME Add button to add movie to watch list from movie details section
 const MovieDetails = () => {
@@ -18,19 +19,23 @@ const MovieDetails = () => {
   const { getMovieDetails, movieDetails, error, loading } = useMovies();
 
   useEffect(() => {
+    console.log("Movie ID:", id);
     getMovieDetails(id);
   }, [id]);
 
   if (loading) {
+    console.log("Loading...");
     return <SkeletonMovieDetails />;
   }
 
   if (error) {
+    console.log("Error:", error);
     return <div>Error: {error.message}</div>;
   }
 
   if (!movieDetails) {
-    return <h2>No Movie Found</h2>;
+    console.log("No Movie Found");
+    return <NoMoviesFound />;
   }
 
   return (
