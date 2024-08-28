@@ -5,12 +5,12 @@ import { Routes, Route } from "react-router-dom";
 import CssBaseline from "@mui/material/CssBaseline";
 import theme from "./theme";
 
-import MovieDetails from "./pages/MovieDetails";
-import Home from "./pages/Home";
-import Navbar from "./components/Navbar";
-import MovieSearch from "./pages/MovieSearch";
-import UserMovies from "./pages/UserMovies";
-import UserWatchedMovies from "./pages/UserWatchedMovies";
+import MovieDetails from "./pages/MovieDetails/MovieDetails";
+import Home from "./pages/Home/Home";
+import Navbar from "./components/common/Navbar";
+import MovieSearch from "./pages/MovieSearch/MovieSearch";
+import UserMovies from "./pages/UserMovies/UserMovies";
+import UserWatchedMovies from "./pages/UserMovies/UserWatchedMovies";
 
 // FIXME: Add logic to not allow user to add movie that is already on watch list
 // FIXME: Change movie details in search to include a "add movie" option - separate state

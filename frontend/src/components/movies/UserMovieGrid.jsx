@@ -1,11 +1,10 @@
 import { useEffect } from "react";
-import { useMovies } from "../context/MovieContext";
-
-// Components
-import MovieCard from "./MovieCard";
-import ErrorMessage from "./ErrorMessage";
 import { Container, Grid, Box } from "@mui/material";
+import { useMovies } from "../../context/MovieContext";
+import MovieCard from "./MovieCard";
+import ErrorMessage from "../common/ErrorMessage";
 import MovieGridSkeleton from "./MovieGridSkeleton";
+import NoMovies from "../common/NoMovies";
 
 const UserMovieGrid = () => {
   const { movies, loading, error, getAllMovies } = useMovies();
@@ -15,7 +14,16 @@ const UserMovieGrid = () => {
   }, []);
 
   if (loading) return <MovieGridSkeleton />;
+
   if (error) return <ErrorMessage message="Error loading movies." />;
+
+  if (movies.length === 0)
+    return (
+      <NoMovies
+        header="No movies in watch list!"
+        message="Search for movies to add below!"
+      />
+    );
 
   return (
     <Container maxWidth="xxl">

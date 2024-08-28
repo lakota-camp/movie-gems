@@ -1,12 +1,9 @@
 import { useState } from "react";
-import { useMovies } from "../context/MovieContext";
 import { useNavigate, useSearchParams } from "react-router-dom";
-
 import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
-
-import LoadingSpinner from "./LoadingSpinner";
+import { useMovies } from "../../context/MovieContext";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -38,7 +35,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   width: "100%",
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
     [theme.breakpoints.up("sm")]: {
@@ -50,14 +46,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-// ADD snackbar to notify user input can't be blank
-
 const SearchMoviesForm = () => {
   const { searchMovies } = useMovies();
-
-  const pageNavigate = useNavigate();
+  const navigate = useNavigate();
   const [, setSearchParams] = useSearchParams();
-
   const [search, setSearch] = useState("");
 
   const handleSearch = (e) => {
@@ -68,7 +60,7 @@ const SearchMoviesForm = () => {
     }
     setSearchParams({ query: search });
     searchMovies(search);
-    pageNavigate(`/search/movies?query=${search}`);
+    navigate(`/search/movies?query=${search}`);
     setSearch("");
   };
 

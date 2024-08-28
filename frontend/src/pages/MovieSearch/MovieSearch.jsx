@@ -1,5 +1,5 @@
-import SearchResultGrid from "../components/SearchResultGrid";
-import { useMovies } from "../context/MovieContext";
+import SearchResultGrid from "../../components/movies/SearchResultGrid";
+import { useMovies } from "../../context/MovieContext";
 import { Container } from "@mui/material";
 
 const MovieSearch = () => {

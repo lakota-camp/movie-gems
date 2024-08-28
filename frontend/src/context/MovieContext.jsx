@@ -7,11 +7,9 @@ const MovieContext = createContext();
 export const useMovies = () => useContext(MovieContext);
 
 export const MovieProvider = ({ children }) => {
-  // Set states
   const [movies, setMovies] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
   const [movieDetails, setMovieDetails] = useState(null);
-
   const [isSearch, setIsSearch] = useState(false);
 
   const { loading, error, startLoading, stopLoading, handleError } =
@@ -75,7 +73,7 @@ export const MovieProvider = ({ children }) => {
     }
   };
 
-  // log when movieDetails changes, add this in your MovieProvider component
+  // Log for when movie changes
   useEffect(() => {
     if (movieDetails) {
       console.log("movieDetails updated:", movieDetails);
@@ -97,8 +95,10 @@ export const MovieProvider = ({ children }) => {
       }
     } catch (err) {
       handleError(err.message || "An unexpected error occurred.");
-      setSearchResults([]); // Clear search results on error
-      await getAllMovies(); // Reload the user's movie list after error
+      // Clear search results on error
+      setSearchResults([]);
+      // Reload the user's movie list after error
+      await getAllMovies();
     } finally {
       stopLoading();
     }
@@ -107,22 +107,22 @@ export const MovieProvider = ({ children }) => {
   const addMovie = async (movieData) => {
     try {
       const data = await movieService.addMovie(movieData);
-      // appends new movie to the rest of the movie list using the rest operator
+      // Appends new movie to the rest of the movie list
       setMovies((prevMovies) => [...prevMovies, data]);
     } catch (err) {
       handleError(err);
     }
   };
 
-  // !FIXME: Update state the remove movie from user list when marked at watched.
   const updateMovie = async (id, updateData) => {
     try {
       await movieService.updateMovie(id, updateData);
-      setMovies((prevMovies) =>
-        prevMovies.map((movie) =>
-          movie._id === id ? { ...movie, ...updateData } : movie,
-        ),
-      );
+      // Delays updating movies so that message can display
+      setTimeout(() => {
+        setMovies((prevMovies) =>
+          prevMovies.filter((movie) => movie._id !== id),
+        );
+      }, 3000);
     } catch (err) {
       handleError(err);
     }

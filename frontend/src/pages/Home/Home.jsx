@@ -1,9 +1,17 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { Container } from "@mui/material";
+import { Button, Container } from "@mui/material";
 import { BsGem } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
+
+  const handleNavigateHome = (e) => {
+    e.preventDefault();
+    navigate("/user/movies");
+  };
+
   return (
     <>
       <Container maxWidth="xl" sx={{ height: "80vh" }}>
@@ -11,12 +19,11 @@ const Home = () => {
           component="section"
           sx={{
             p: 4,
-
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-            height: "100%", // Ensure Box takes the full height of the container
+            height: "100%",
             textAlign: "center",
           }}
         >
@@ -33,10 +40,18 @@ const Home = () => {
             }}
           >
             <Typography variant="h3">
-              <BsGem />{" "}
+              <BsGem />
             </Typography>
+            <Typography variant="h5">Your personal movie assistant</Typography>
           </Box>
-          <Typography variant="h5">Your personal movie assistant</Typography>
+
+          <Button
+            variant="outlined"
+            to="/user/movies"
+            onClick={handleNavigateHome}
+          >
+            Go to my movies
+          </Button>
         </Box>
       </Container>
     </>

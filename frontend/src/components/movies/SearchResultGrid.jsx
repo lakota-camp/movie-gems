@@ -1,11 +1,10 @@
-import { useMovies } from "../context/MovieContext";
-import { useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
-// Components
-import MovieCard from "./MovieCard";
-import ErrorMessage from "./ErrorMessage";
+import { useSearchParams } from "react-router-dom";
 import { Container, Grid, Box } from "@mui/material";
-import NoMoviesFound from "./NoMoviesFound";
+import { useMovies } from "../../context/MovieContext";
+import MovieCard from "./MovieCard";
+import ErrorMessage from "../common/ErrorMessage";
+import Error from "../common/Error";
 import MovieGridSkeleton from "./MovieGridSkeleton";
 
 const SearchResultGrid = () => {
@@ -20,11 +19,13 @@ const SearchResultGrid = () => {
   }, []);
 
   if (loading) return <MovieGridSkeleton />;
+
   if (error)
     return <ErrorMessage isError={true} message="Error loading movies." />;
+
   if (searchResults.length === 0)
     return (
-      <NoMoviesFound
+      <Error
         header="No Movies found."
         message="It looks like we couldn't find any movies matching your
                 search. Try searching again or explore your movie collection."

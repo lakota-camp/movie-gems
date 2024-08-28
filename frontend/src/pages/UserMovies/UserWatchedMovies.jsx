@@ -1,6 +1,6 @@
 import { Container } from "@mui/material";
-import UserWatchedMovieGrid from "../components/UserWatchedMovieGrid";
-import Heading from "../components/Heading";
+import UserWatchedMovieGrid from "../../components/movies/UserWatchedMovieGrid";
+import Heading from "../../components/common/Heading";
 
 const UserWatchedMovies = () => {
   return (

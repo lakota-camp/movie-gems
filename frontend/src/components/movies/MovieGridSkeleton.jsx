@@ -11,7 +11,7 @@ const MovieGridSkeleton = () => {
             columnSpacing={{ xs: 1, sm: 1, md: 1, lg: 1, xl: 1 }}
             justifyContent="center"
           >
-            {Array.from(new Array(8)).map((_, index) => (
+            {Array.from({ length: 8 }).map((_, index) => (
               <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
                 <Box sx={{ maxWidth: 345, margin: "auto" }}>
                   <Skeleton variant="rectangular" width={345} height={500} />

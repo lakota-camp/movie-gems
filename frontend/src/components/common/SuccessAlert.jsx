@@ -1,9 +1,6 @@
-import Alert from "@mui/material/Alert";
-import Box from "@mui/material/Box";
-import IconButton from "@mui/material/IconButton";
-import Collapse from "@mui/material/Collapse";
-import CloseIcon from "@mui/icons-material/Close";
 import { useState } from "react";
+import { Alert, Box, IconButton, Collapse } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 
 export default function SuccessAlert({ message }) {
   const [open, setOpen] = useState(true);

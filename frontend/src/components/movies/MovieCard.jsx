@@ -1,32 +1,33 @@
-import { useMovies } from "../context/MovieContext";
-import ButtonMain from "./Button";
-import { Card, CardContent, Rating } from "@mui/material";
-import CardActions from "@mui/material/CardActions";
-import CardMedia from "@mui/material/CardMedia";
-import { Link } from "react-router-dom";
-import SuccessAlert from "./SuccessAlert";
 import { useState } from "react";
-
-// import Typography from "@mui/material/Typography";
+import { Link } from "react-router-dom";
+import {
+  Card,
+  CardContent,
+  CardActions,
+  CardMedia,
+  Rating,
+} from "@mui/material";
+import { useMovies } from "../../context/MovieContext";
+import ButtonMain from "../common/Button";
+import SuccessAlert from "../common/SuccessAlert";
 
 const MovieCard = ({ movie, isSearch }) => {
   const { addMovie, deleteMovie, updateMovie } = useMovies();
   const [movieAdded, setMovieAdded] = useState(false);
 
-  // Function to handle delete event
   const handleDelete = (e) => {
     e.preventDefault();
     deleteMovie(movie._id);
   };
 
-  // Function to handle update event
   const handleUpdate = (e) => {
     e.preventDefault();
     const updateData = { Watched: true };
     updateMovie(movie._id, updateData);
+    setMovieAdded(true);
+    setTimeout(() => setMovieAdded(false), 3000);
   };
 
-  // Function to handle add event
   const handleAdd = (e) => {
     e.preventDefault();
     const movieData = {
@@ -39,23 +40,35 @@ const MovieCard = ({ movie, isSearch }) => {
     addMovie(movieData);
 
     setMovieAdded(true);
-
     setTimeout(() => setMovieAdded(false), 3000);
   };
+  console.log(movie.Poster);
+
   return (
     <>
-      {movieAdded && <SuccessAlert message="Movie added to watch list" />}
+      {movieAdded && (
+        <SuccessAlert
+          message={
+            isSearch ? "Movie added to watch list" : "Movie marked as watched"
+          }
+        />
+      )}
+
       <Card elevation={10} sx={{ maxWidth: 345 }}>
         <Link to={`/user/movies/details/${movie.imdbID}`}>
           <CardMedia
             sx={{ height: 500 }}
-            image={movie.Poster}
+            image={
+              movie.Poster !== "N/A"
+                ? movie.Poster
+                : "https://placehold.co/600x400?text=No\nPoster"
+            }
             title={movie.Title}
             id={movie._id}
           />
         </Link>
         <CardContent sx={{ textAlign: "center" }}>
-          <Rating name="size-small" defaultValue={0} sx={{ color: "white" }} />
+          {/* <Rating name="size-small" defaultValue={0} sx={{ color: "white" }} /> */}
         </CardContent>
         <CardActions
           sx={{
@@ -65,7 +78,6 @@ const MovieCard = ({ movie, isSearch }) => {
             paddingTop: 1,
           }}
         >
-          {/* Dynamically updates button choices based on user movies or search results */}
           {isSearch ? (
             <>
               <ButtonMain
@@ -74,7 +86,6 @@ const MovieCard = ({ movie, isSearch }) => {
                 text="Add to Watch list"
                 color="primary"
               />
-              {/* <MovieModal imdbID={movie.imdbID} /> */}
             </>
           ) : (
             <>
@@ -90,8 +101,6 @@ const MovieCard = ({ movie, isSearch }) => {
                 text="Delete"
                 color="secondary"
               />
-              {/* FIXME: Bug when opening modal... data is fetched properly but trouble with modal opening... */}
-              {/* <MovieModal imdbID={movie.imdbID} /> */}
             </>
           )}
         </CardActions>

@@ -1,6 +1,6 @@
 import { Container } from "@mui/material";
-import UserMovieGrid from "../components/UserMovieGrid";
-import Heading from "../components/Heading";
+import UserMovieGrid from "../../components/movies/UserMovieGrid";
+import Heading from "../../components/common/Heading";
 const UserMovies = () => {
   return (
     <>

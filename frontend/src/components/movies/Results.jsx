@@ -1,6 +1,6 @@
+import { Container, Grid } from "@mui/material";
 import MovieCard from "./MovieCard";
 import MovieGrid from "./MovieGrid";
-import { Container, Grid } from "@mui/material";
 
 const Results = ({ movies }) => {
   return (

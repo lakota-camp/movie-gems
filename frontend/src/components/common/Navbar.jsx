@@ -1,33 +1,16 @@
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Grid";
-import SearchMoviesForm from "./SearchMovies";
+import { AppBar, Box, Toolbar, Typography, Grid, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { useMovies } from "../context/MovieContext";
-import Button from "@mui/material/Button";
+import SearchMoviesForm from "../movies/SearchMovies";
+import { useMovies } from "../../context/MovieContext";
 
 const Navbar = ({ title, myMovies, watchedMovies }) => {
   const navigate = useNavigate();
   const { resetSearch } = useMovies();
 
-  const handleNavigateToMovies = (e) => {
+  const handleNavigate = (path) => (e) => {
     e.preventDefault();
     resetSearch();
-    navigate("/user/movies");
-  };
-
-  const handleNavigateToWatchedMovies = (e) => {
-    e.preventDefault();
-    resetSearch();
-    navigate("/user/movies/watched");
-  };
-
-  const handleNavigateHome = (e) => {
-    e.preventDefault();
-    resetSearch();
-    navigate("/");
+    navigate(path);
   };
 
   return (
@@ -46,7 +29,7 @@ const Navbar = ({ title, myMovies, watchedMovies }) => {
               >
                 <Button
                   to="/"
-                  onClick={handleNavigateHome}
+                  onClick={handleNavigate("/")}
                   style={{ textDecoration: "none", color: "inherit" }}
                 >
                   {title}
@@ -59,13 +42,13 @@ const Navbar = ({ title, myMovies, watchedMovies }) => {
               sx={{ display: "flex", justifyContent: "center" }}
             >
               <Button
-                onClick={handleNavigateToMovies}
+                onClick={handleNavigate("/user/movies")}
                 style={{ textDecoration: "none", color: "inherit" }}
               >
                 {myMovies}
               </Button>
               <Button
-                onClick={handleNavigateToWatchedMovies}
+                onClick={handleNavigate("/user/movies/watched")}
                 style={{ textDecoration: "none", color: "inherit" }}
               >
                 {watchedMovies}

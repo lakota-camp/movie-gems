@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
-import { useMovies } from "../context/MovieContext";
+import { useMovies } from "../../context/MovieContext";
 import {
   Container,
   Box,
@@ -10,9 +10,8 @@ import {
   Card,
   CardContent,
 } from "@mui/material";
-import SkeletonMovieDetails from "../components/SkeletonMovieDetails";
-import NoMoviesFound from "../components/NoMoviesFound";
-import ErrorMessage from "../components/ErrorMessage";
+import SkeletonMovieDetails from "../../components/movies/SkeletonMovieDetails";
+import Error from "../../components/common/Error";
 
 // !FIXME Add button to add movie to watch list from movie details section
 const MovieDetails = () => {
@@ -32,7 +31,7 @@ const MovieDetails = () => {
   if (error) {
     console.log("Error:", error);
     return (
-      <NoMoviesFound
+      <Error
         isError={true}
         header="Error"
         message="It looks like we came across an error..."
@@ -43,13 +42,14 @@ const MovieDetails = () => {
   if (!movieDetails) {
     console.log("No Movie Found");
     return (
-      <NoMoviesFound
+      <Error
         header="No Movies Details Found"
         message="It looks like we couldn't find any movies matching your
                 search. Try searching again or explore your movie collection."
       />
     );
   }
+  console.log(movieDetails.Poster);
 
   return (
     <>
@@ -126,7 +126,11 @@ const MovieDetails = () => {
           }}
         >
           <img
-            src={movieDetails.Poster}
+            src={
+              movieDetails.Poster !== "N/A"
+                ? movieDetails.Poster
+                : "https://placehold.co/400x600?text=No\nPoster"
+            }
             alt={movieDetails.Title}
             style={{
               maxHeight: "500px",
