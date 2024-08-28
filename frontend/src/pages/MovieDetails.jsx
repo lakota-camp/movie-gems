@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import SkeletonMovieDetails from "../components/SkeletonMovieDetails";
 import NoMoviesFound from "../components/NoMoviesFound";
+import ErrorMessage from "../components/ErrorMessage";
 
 // !FIXME Add button to add movie to watch list from movie details section
 const MovieDetails = () => {
@@ -30,12 +31,24 @@ const MovieDetails = () => {
 
   if (error) {
     console.log("Error:", error);
-    return <div>Error: {error.message}</div>;
+    return (
+      <NoMoviesFound
+        isError={true}
+        header="Error"
+        message="It looks like we came across an error..."
+      />
+    );
   }
 
   if (!movieDetails) {
     console.log("No Movie Found");
-    return <NoMoviesFound />;
+    return (
+      <NoMoviesFound
+        header="No Movies Details Found"
+        message="It looks like we couldn't find any movies matching your
+                search. Try searching again or explore your movie collection."
+      />
+    );
   }
 
   return (

@@ -20,8 +20,16 @@ const SearchResultGrid = () => {
   }, []);
 
   if (loading) return <MovieGridSkeleton />;
-  if (error) return <ErrorMessage message="Error loading movies." />;
-  if (searchResults.length === 0) return <NoMoviesFound />;
+  if (error)
+    return <ErrorMessage isError={true} message="Error loading movies." />;
+  if (searchResults.length === 0)
+    return (
+      <NoMoviesFound
+        header="No Movies found."
+        message="It looks like we couldn't find any movies matching your
+                search. Try searching again or explore your movie collection."
+      />
+    );
 
   return (
     <Container maxWidth="xxl">

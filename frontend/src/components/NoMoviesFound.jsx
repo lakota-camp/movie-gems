@@ -1,4 +1,5 @@
 import {
+  Alert,
   Box,
   Button,
   Card,
@@ -8,45 +9,76 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 
-const NoMoviesFound = () => {
+const NoMoviesFound = ({ header, message, isError = false }) => {
   return (
-    <div>
+    <>
       <Container maxWidth="md" sx={{ textAlign: "center", mt: 4 }}>
-        <Box sx={{ borderRadius: 2, p: 3 }}>
-          <Card
-            sx={{ minWidth: 275, border: "2px solid grey", padding: "1rem" }}
-          >
-            <CardContent>
-              <Typography
-                color="text.primary"
-                variant="h4"
-                align="center"
-                gutterBottom
-              >
-                No Movies Found
-              </Typography>
-
-              <Typography variant="body1" color="textSecondary" paragraph>
-                It looks like we couldn&apos;t find any movies matching your
-                search. Try searching again or explore your movie collection.
-              </Typography>
-
-              <Button
-                variant="contained"
-                color="primary"
-                component={Link}
-                to="/user/movies"
-                sx={{ mt: 2, p: 2 }}
-              >
-                Go to My Movies
-              </Button>
-
-              <Typography variant="body2"></Typography>
-            </CardContent>
-          </Card>
-        </Box>
+        {isError ? (
+          <Box sx={{ borderRadius: 2, p: 3, textAlign: "center" }}>
+            <Card
+              sx={{
+                minWidth: 275,
+                border: "2px solid grey",
+                padding: "1rem",
+                background: "rgb(184, 13, 12, .4)",
+              }}
+            >
+              <CardContent>
+                <Typography
+                  color="text.primary"
+                  variant="h4"
+                  align="center"
+                  gutterBottom
+                >
+                  {header}
+                </Typography>
+                <Typography variant="body1" color="textSecondary" paragraph>
+                  {message}
+                </Typography>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  component={Link}
+                  to="/user/movies"
+                  sx={{ mt: 2, p: 2 }}
+                >
+                  Go to My Movies
+                </Button>
+              </CardContent>
+            </Card>
+          </Box>
+        ) : (
+          <Box sx={{ borderRadius: 2, p: 3 }}>
+            <Card
+              sx={{ minWidth: 275, border: "2px solid grey", padding: "1rem" }}
+            >
+              <CardContent>
+                <Typography
+                  color="text.primary"
+                  variant="h4"
+                  align="center"
+                  gutterBottom
+                >
+                  {header}
+                </Typography>
+                <Typography variant="body1" color="textSecondary" paragraph>
+                  {message}
+                </Typography>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  component={Link}
+                  to="/user/movies"
+                  sx={{ mt: 2, p: 2 }}
+                >
+                  Go to My Movies
+                </Button>
+              </CardContent>
+            </Card>
+          </Box>
+        )}
       </Container>
-    </div>
+    </>
   );
 };
 
