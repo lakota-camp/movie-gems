@@ -4,11 +4,11 @@
 
 ### [Live Demo](https://www.example.com)
 
-Welcome to **MovieGems**! A interactive movie watch list web app built to streamline your movie selection process! You can search for movies, add them to your movie watch list, and mark movies as watched once you watch them!
+Welcome to **MovieGems**! A interactive movie watch list web app built to streamline your movie selection process. You can search for movies, add them to your movie watch list, and mark movies as watched once you watch them!
 
-## 🌟 Features
+## ⭐︎ Features
 
-- **Search & Discover**: Powered by the OMDB API, this app allows you to search through an extensive database of movies. From classics and indie films, to the latest blockbusters, it's all just a simple search away.
+- **Search & Discover**: Powered by the OMDB API, this app allows you to search through an extensive database of movies. From classics and indie films, to the latest blockbusters.
 - **Personal Watch list**: If you find a movie the intrigues you, add it to your watch list! Your movies are safely stored in MongoDB, ready to be viewed anytime.
 - **Watched Movies**: Once you finish a movie, mark it as watched and it’ll move to a separate list, so you can keep track of your movie-watching goals.
 - **Dynamic Error Handling**: Errors are handled gracefully, whether it’s a missing movie poster or a network error, the app keeps running smoothly.
@@ -23,7 +23,7 @@ This app is built using the **MERN** stack, bringing together some of the most p
 - **React**: The frontend - Fast, responsive, and interactive.
 - **Node.js**: The foundation of the server, running everything smoothly in JavaScript.
 
-## 🚀 Getting Started
+## ↗️ Getting Started
 
 Follow these steps to get the app running on your local machine:
 
@@ -85,7 +85,7 @@ Make sure you have the following installed:
 
 Here’s where the app could grow in the future:
 
-- **User Authentication**: Allow users to create accounts and save personalized watch lists.
+- **User Authentication**: [Clerk](https://clerk.com/) integration - Allow users to create accounts and save personalized watch lists.
 - **Movie Reviews**: Integrate a feature where users can rate and review movies.
 - **AI-Powered Semantic Search**: Enable users to perform advanced searches using AI-driven semantic search capabilities. By leveraging vector embeddings, users can find movies that align closely with their interests and search intent, making the search experience more intuitive and accurate.
 - **Advanced Analytics & User Dashboard**: Introduce a comprehensive user dashboard, similar to Spotify Wrapped, where users can explore detailed analytics of their movie-watching habits. The dashboard will provide insights into viewing trends, favorite genres, and personalized summaries of movie preferences. Additionally, AI-powered recommendations and predictive analytics will suggest future movies based on individual watching behavior and tastes, creating a truly personalized movie discovery experience.

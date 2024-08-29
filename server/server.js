@@ -11,6 +11,7 @@ const {
   ipLogger,
   timeRequestLog,
 } = require('./middleware/requestLog');
+
 const cors = require('cors');
 
 const app = express();
@@ -21,6 +22,11 @@ const host = process.env.DB_HOST;
 
 // Middleware
 app.use(cors({}));
+// app.use(
+//   cors({
+//     origin: 'https://your-frontend-site.onrender.com',
+//   }),
+// );
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(requestLogger);
