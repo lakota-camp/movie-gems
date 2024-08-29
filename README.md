@@ -92,10 +92,6 @@ Here’s where the app could grow in the future:
 
 - **Social Sharing**: Let users share their watch lists or favorite movies with friends.
 
-## 🤝 Contributing
-
-If you have ideas to improve the app or found a bug, feel free to fork the repo and submit a pull request. Contributions are welcome!
-
 ## 📜 License
 
 This project is licensed under the [MIT License](https://opensource.org/licenses/MIT) - see the [LICENSE](LICENSE) file for details.
