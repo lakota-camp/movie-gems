@@ -7,4 +7,6 @@ yarn-error.log*
 
 # env
 .env
- 
+
+server/controllers/future-updates
+server/routes/future-updates
