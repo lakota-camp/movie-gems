@@ -72,14 +72,11 @@ Make sure you have the following installed:
 
    ```bash
    cd ../client
-   npm start
+   npm run dev
    ```
 
-6. Enjoy the app:
-   Open your browser and go to http://localhost:3000.
-
-7. **Enjoy the app**:
-   Open your browser and go to [http://localhost:3000](http://localhost:3000).
+6. **Enjoy the app**:
+   Open your browser and go to [http://localhost:3000](http://localhost:3000) or your specified port.
 
 ## 🧩 Future Improvements
 

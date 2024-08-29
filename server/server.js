@@ -18,7 +18,7 @@ const app = express();
 
 // Env variables
 const port = process.env.PORT || 3000;
-const host = process.env.DB_HOST;
+const host = process.env.DB_HOST || 'localhost';
 
 // Middleware
 app.use(cors({}));
