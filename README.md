@@ -88,7 +88,7 @@ Here’s where the app could grow in the future:
 - **User Authentication**: [Clerk](https://clerk.com/) integration - Allow users to create accounts and save personalized watch lists.
 - **Movie Reviews**: Integrate a feature where users can rate and review movies.
 - **AI-Powered Semantic Search**: Enable users to perform advanced searches using AI-driven semantic search capabilities. By leveraging vector embeddings, users can find movies that align closely with their interests and search intent, making the search experience more intuitive and accurate.
-- **Advanced Analytics & User Dashboard**: Introduce a comprehensive user dashboard, similar to Spotify Wrapped, where users can explore detailed analytics of their movie-watching habits. The dashboard will provide insights into viewing trends, favorite genres, and personalized summaries of movie preferences. Additionally, AI-powered recommendations and predictive analytics will suggest future movies based on individual watching behavior and tastes, creating a truly personalized movie discovery experience.
+- **Advanced Analytics & User Dashboard**: Introduce a comprehensive user dashboard, similar to Spotify Wrapped, where users can explore detailed analytics of their movie-watching habits. The dashboard will provide insights into viewing trends, favorite genres, and personalized summaries of movie preferences. Additionally, AI-powered recommendations and predictive analytics will suggest future movies based on individual watching behavior and tastes, creating a personalized movie discovery experience.
 
 - **Social Sharing**: Let users share their watch lists or favorite movies with friends.
 

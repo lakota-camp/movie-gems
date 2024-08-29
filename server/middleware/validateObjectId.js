@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const { ObjectId } = mongoose.Types;
 
+// Validate MongoDB ID
 const validateObjectId = (req, res, next) => {
   const id = req.params.id;
 

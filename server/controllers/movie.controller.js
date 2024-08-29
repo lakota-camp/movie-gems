@@ -1,7 +1,5 @@
 const movieService = require('../services/movieService');
 
-// FIXME: Refactor code to be more DRY - extract common async res.status(200) and res.status(500) functionality
-
 // * CRUD Movie * //
 
 // Create a movie
@@ -19,7 +17,7 @@ const createMovie = async (req, res) => {
 // Read all movies
 const getAllMovies = async (req, res) => {
   try {
-    const movies = await movieService.getAllMovies();
+    const movies = await movieService.getMovies(false);
     res.status(200).json(movies);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -29,7 +27,7 @@ const getAllMovies = async (req, res) => {
 // Read all watched movies
 const getAllWatchedMovies = async (req, res) => {
   try {
-    const watchedMovies = await movieService.getAllWatchedMovies();
+    const watchedMovies = await movieService.getMovies(true);
     res.status(200).json(watchedMovies);
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch watched movies.' });
@@ -50,8 +48,6 @@ const getMovieById = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-
-// FIXME: change update to only allow user to be able to update boolean for is watched attribute
 
 // Update a movie
 const updateMovie = async (req, res) => {
@@ -123,6 +119,7 @@ const searchMovies = async (req, res) => {
   }
 };
 
+// Fetch movies details from OMDB API
 const fetchMovieDetails = async (req, res) => {
   const { id } = req.params;
   console.log('id:', id);

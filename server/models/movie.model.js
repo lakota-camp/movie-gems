@@ -91,14 +91,6 @@ const MovieSchema = mongoose.Schema(
       type: Boolean,
       default: false,
     },
-
-    // Future Update: users have their own personal movie lists
-    // ,
-    // userId: {
-    //   type: mongoose.Schema.Types.ObjectId,
-    //   ref: 'User',
-    //   required: true,
-    // }
   },
   {
     timestamps: true,

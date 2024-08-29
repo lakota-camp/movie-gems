@@ -1,6 +1,10 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
+/*
+  Auth middleware for when user authentication is added. 
+*/
+
 const comparePasswords = (pass, hash) => {
   return bcrypt.compare(pass, hash);
 };

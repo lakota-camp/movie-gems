@@ -20,10 +20,11 @@ const {
   getAllWatchedMovies,
 } = require('../controllers/movie.controller.js');
 
+// * Movie OMDB API fetch routes * //
+
 // Search for movie
 router.get('/search', validateSearchQuery, searchMovies);
 
-// FIXME: add route to get movie details by IMDB id
 // Fetch movie details using IMDB Id
 router.get('/details/:id', validateIdSearchQuery, fetchMovieDetails);
 

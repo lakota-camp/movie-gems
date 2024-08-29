@@ -1,13 +1,12 @@
 require('dotenv').config();
 const Movie = require('../models/movie.model');
 const axios = require('axios');
+
 // Cache
 const NodeCache = require('node-cache');
 const myCache = new NodeCache({ stdTTL: 86400 });
 
 const apiKey = process.env.OMDB_API_KEY;
-
-// FIXME: Organize, clean up, and add proper logging - Double check searchMovie function
 
 // * Movie Service Class *//
 class MovieService {
@@ -19,6 +18,12 @@ class MovieService {
   async getAllMovies() {
     return await Movie.find({
       Watched: false,
+    });
+  }
+
+  async getMovies(status) {
+    return await Movie.find({
+      Watched: status,
     });
   }
 

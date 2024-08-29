@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 const Movie = require('./movie.model');
 
+/*
+  Use DB Schema for future update
+*/
+
 // * User DB Schema * //
 const UserSchema = mongoose.Schema(
   {
