@@ -44,7 +44,7 @@ Make sure you have the following installed:
    ```
 2. **cd server dependencies**:
    ```bash
-   cd ../client
+   cd ../server
    npm install
    ```
 3. **Install client dependencies**:
