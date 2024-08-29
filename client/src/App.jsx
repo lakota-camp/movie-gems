@@ -12,7 +12,6 @@ import MovieSearch from "./pages/MovieSearch/MovieSearch";
 import UserMovies from "./pages/UserMovies/UserMovies";
 import UserWatchedMovies from "./pages/UserMovies/UserWatchedMovies";
 
-// FIXME: Add logic to not allow user to add movie that is already on watch list
 // FIXME: Change movie details in search to include a "add movie" option - separate state
 // FIXME: Future update - allow users to browse movies be specific categories
 

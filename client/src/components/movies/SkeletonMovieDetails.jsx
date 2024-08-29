@@ -11,7 +11,6 @@ const SkeletonMovieDetails = () => {
           display: "flex",
           flexDirection: "row",
           alignItems: "center",
-          // border: "solid red",
         }}
       >
         <Skeleton

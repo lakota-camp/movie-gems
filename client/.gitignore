@@ -24,4 +24,4 @@ dist-ssr
 *.sw?
 
 # text files 
-.txt
+*.txt

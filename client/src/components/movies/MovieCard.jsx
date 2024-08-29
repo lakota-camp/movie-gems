@@ -87,6 +87,15 @@ const MovieCard = ({ movie, isSearch }) => {
                 color="primary"
               />
             </>
+          ) : movie.Watched ? (
+            <>
+              <ButtonMain
+                onClick={handleDelete}
+                variant="outlined"
+                text="Delete"
+                color="secondary"
+              />
+            </>
           ) : (
             <>
               <ButtonMain
