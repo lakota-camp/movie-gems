@@ -50,7 +50,7 @@ const Home = () => {
             to="/user/movies"
             onClick={handleNavigateHome}
           >
-            Go to my movies
+            Go to my movies ͢
           </Button>
         </Box>
       </Container>
