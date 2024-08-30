@@ -10,8 +10,6 @@ const useFetchData = (url) => {
 
   // Fetch data
   useEffect(() => {
-    // console.log('useEffect triggered');
-
     const fetchData = async () => {
       try {
         const response = await axios.get(url);

@@ -19,17 +19,14 @@ const MovieDetails = () => {
   const { getMovieDetails, movieDetails, error, loading } = useMovies();
 
   useEffect(() => {
-    console.log("Movie ID:", id);
     getMovieDetails(id);
   }, [id]);
 
   if (loading) {
-    console.log("Loading...");
     return <SkeletonMovieDetails />;
   }
 
   if (error) {
-    console.log("Error:", error);
     return (
       <Error
         isError={true}
@@ -40,7 +37,6 @@ const MovieDetails = () => {
   }
 
   if (!movieDetails) {
-    console.log("No Movie Found");
     return (
       <Error
         header="No Movies Details Found"
@@ -49,7 +45,6 @@ const MovieDetails = () => {
       />
     );
   }
-  console.log(movieDetails.Poster);
 
   return (
     <>

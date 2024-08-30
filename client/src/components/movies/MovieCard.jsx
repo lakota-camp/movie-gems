@@ -42,7 +42,6 @@ const MovieCard = ({ movie, isSearch }) => {
     setMovieAdded(true);
     setTimeout(() => setMovieAdded(false), 3000);
   };
-  console.log(movie.Poster);
 
   return (
     <>

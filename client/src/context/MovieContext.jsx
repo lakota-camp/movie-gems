@@ -22,7 +22,6 @@ export const MovieProvider = ({ children }) => {
     setIsSearch(false);
     try {
       const data = await movieService.fetchMovies();
-      console.log("Fetched movies data:", data);
 
       if (Array.isArray(data)) {
         setMovies(data);
@@ -45,7 +44,6 @@ export const MovieProvider = ({ children }) => {
     setIsSearch(false);
     try {
       const data = await movieService.fetchWatchedMovies();
-      console.log("Fetched movies data:", data);
 
       if (Array.isArray(data)) {
         setMovies(data);

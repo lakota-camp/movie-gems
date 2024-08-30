@@ -28,7 +28,7 @@ const Home = () => {
           }}
         >
           <Typography variant="h2">
-            Welcome to <strong>MovieGems</strong>
+            <strong>Welcome to MovieGems</strong>
           </Typography>
           <Box
             component="section"
