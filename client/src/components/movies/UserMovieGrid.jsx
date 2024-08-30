@@ -16,7 +16,6 @@ const UserMovieGrid = () => {
   if (loading) return <MovieGridSkeleton />;
 
   if (error) return <ErrorMessage message="Error loading movies." />;
-  console.log(error);
 
   if (movies.length === 0)
     return (
