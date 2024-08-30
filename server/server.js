@@ -20,13 +20,14 @@ const app = express();
 const port = process.env.PORT || 3000;
 const host = process.env.DB_HOST || 'localhost';
 
+// Allow request from frontend during development and production
+const corsOptions = {
+  origin: ['http://localhost:5173', 'https://movie-gems-client.onrender.com/'],
+  optionsSuccessStatus: 200,
+};
+
 // Middleware
 app.use(cors({}));
-// app.use(
-//   cors({
-//     origin: 'https://your-frontend-site.onrender.com',
-//   }),
-// );
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(requestLogger);

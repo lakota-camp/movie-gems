@@ -22,9 +22,16 @@ export const MovieProvider = ({ children }) => {
     setIsSearch(false);
     try {
       const data = await movieService.fetchMovies();
-      setMovies(data);
+      console.log("Fetched movies data:", data);
+
+      if (Array.isArray(data)) {
+        setMovies(data);
+      } else {
+        setMovies([]); // Fallback to an empty array if the data is not an array
+      }
     } catch (err) {
       handleError(err);
+      setMovies([]);
     } finally {
       // setTimeout to ensure loading is smooth
       setTimeout(() => stopLoading(), 100);
@@ -38,9 +45,16 @@ export const MovieProvider = ({ children }) => {
     setIsSearch(false);
     try {
       const data = await movieService.fetchWatchedMovies();
-      setMovies(data);
+      console.log("Fetched movies data:", data);
+
+      if (Array.isArray(data)) {
+        setMovies(data);
+      } else {
+        setMovies([]); // Fallback to an empty array if the data is not an array
+      }
     } catch (err) {
       handleError(err);
+      setMovies([]);
     } finally {
       // setTimeout to ensure loading is smooth
       setTimeout(() => stopLoading(), 100);
