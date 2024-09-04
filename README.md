@@ -2,7 +2,7 @@
 
 ## 🎬 Movie Watchlist App
 
-<!-- ### [Live Demo](https://www.example.com) -->
+### [Demo](https://movie-gems-client.onrender.com/)
 
 Welcome to **MovieGems**! A interactive movie watch list web app built to streamline your movie selection process. You can search for movies, add them to your movie watch list, and mark movies as watched once you watch them!
 
