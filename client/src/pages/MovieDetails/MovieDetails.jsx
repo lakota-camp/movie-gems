@@ -3,12 +3,12 @@ import { useEffect } from "react";
 import { useMovies } from "../../context/MovieContext";
 import {
   Container,
-  Box,
   Typography,
   List,
   ListItem,
   Card,
   CardContent,
+  Grid,
 } from "@mui/material";
 import SkeletonMovieDetails from "../../components/movies/SkeletonMovieDetails";
 import Error from "../../components/common/Error";
@@ -47,95 +47,83 @@ const MovieDetails = () => {
   }
 
   return (
-    <>
-      {/* Text Box */}
-      <Container
-        maxWidth="lg"
-        sx={{
-          marginTop: "4rem",
-          marginBottom: "2rem",
-          display: "flex",
-          flexDirection: "row",
-        }}
-      >
-        <Card sx={{ minWidth: 275, border: "2px solid grey", padding: "1rem" }}>
-          <CardContent>
-            <Typography
-              color="text.secondary"
-              variant="h5"
-              align="left"
-              gutterBottom
-            >
-              {movieDetails.Title}
-            </Typography>
+    <Container maxWidth="lg" sx={{ my: 4 }}>
+      <Grid container spacing={3}>
+        {/* Movie Details */}
+        <Grid item xs={12} md={7}>
+          <Card sx={{ height: "100%", border: "2px solid grey", p: 2 }}>
+            <CardContent>
+              <Typography color="text.secondary" variant="h5" gutterBottom>
+                {movieDetails.Title}
+              </Typography>
 
-            <Typography variant="body2">
-              <List>
-                <ListItem>Title: {movieDetails.Title}</ListItem>
-                <ListItem>Plot: {movieDetails.Plot}</ListItem>
-                <ListItem>Director: {movieDetails.Director}</ListItem>
-                <ListItem>Rated: {movieDetails.Rated}</ListItem>
-                <ListItem>Released: {movieDetails.Year}</ListItem>
-                <ListItem>Actors: {movieDetails.Actors}</ListItem>
-                <ListItem>Box Office: {movieDetails.BoxOffice}</ListItem>
-                <ListItem>Awards: {movieDetails.Awards}</ListItem>
-                <ListItem>imdbRating: {movieDetails.imdbRating} / 10</ListItem>
-              </List>
-            </Typography>
-
-            <Typography
-              color="text.secondary"
-              variant="h5"
-              align="left"
-              gutterBottom
-              sx={{ marginTop: 2 }}
-            >
-              Ratings
-            </Typography>
-
-            <Typography variant="body2">
-              <List>
-                {movieDetails.Ratings.map((rating, index) => (
-                  <ListItem key={index}>
-                    {rating.Source}: {rating.Value}
+              <Typography variant="body2" component="div">
+                <List>
+                  <ListItem>Title: {movieDetails.Title}</ListItem>
+                  <ListItem>Plot: {movieDetails.Plot}</ListItem>
+                  <ListItem>Director: {movieDetails.Director}</ListItem>
+                  <ListItem>Rated: {movieDetails.Rated}</ListItem>
+                  <ListItem>Released: {movieDetails.Year}</ListItem>
+                  <ListItem>Actors: {movieDetails.Actors}</ListItem>
+                  <ListItem>Box Office: {movieDetails.BoxOffice}</ListItem>
+                  <ListItem>Awards: {movieDetails.Awards}</ListItem>
+                  <ListItem>
+                    imdbRating: {movieDetails.imdbRating} / 10
                   </ListItem>
-                ))}
-              </List>
-            </Typography>
-          </CardContent>
-        </Card>
+                </List>
+              </Typography>
 
-        {/* Image box */}
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            flex: 1,
-            justifyContent: "center",
-            marginTop: 2,
-            // border: "2px solid grey",
-            padding: "2rem",
-            margin: "2rem",
-            borderRadius: 2,
-          }}
-        >
-          <img
-            src={
-              movieDetails.Poster !== "N/A"
-                ? movieDetails.Poster
-                : "https://placehold.co/400x600?text=No\nPoster"
-            }
-            alt={movieDetails.Title}
-            style={{
-              maxHeight: "500px",
-              objectFit: "cover",
-              borderRadius: 8,
+              <Typography
+                color="text.secondary"
+                variant="h5"
+                gutterBottom
+                sx={{ mt: 2 }}
+              >
+                Ratings
+              </Typography>
+
+              <Typography variant="body2" component="div">
+                <List>
+                  {movieDetails.Ratings.map((rating, index) => (
+                    <ListItem key={index}>
+                      {rating.Source}: {rating.Value}
+                    </ListItem>
+                  ))}
+                </List>
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+
+        {/* Movie Poster */}
+        <Grid item xs={12} md={5}>
+          <Card
+            sx={{
+              height: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              p: 2,
             }}
-          />
-        </Box>
-      </Container>
-    </>
+          >
+            <img
+              src={
+                movieDetails.Poster !== "N/A"
+                  ? movieDetails.Poster
+                  : "https://placehold.co/400x600?text=No\nPoster"
+              }
+              alt={movieDetails.Title}
+              style={{
+                maxWidth: "100%",
+                maxHeight: "500px",
+                objectFit: "contain",
+                borderRadius: 8,
+              }}
+            />
+          </Card>
+        </Grid>
+      </Grid>
+    </Container>
   );
 };
 
