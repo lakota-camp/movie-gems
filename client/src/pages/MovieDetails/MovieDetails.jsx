@@ -54,22 +54,17 @@ const MovieDetails = () => {
           <Card sx={{ height: "100%", border: "2px solid grey", p: 2 }}>
             <CardContent>
               <Typography color="text.secondary" variant="h5" gutterBottom>
-                {movieDetails.Title}
+                {movieDetails.Title} | {movieDetails.Year} |{" "}
+                {movieDetails.Rated}
               </Typography>
 
               <Typography variant="body2" component="div">
                 <List>
-                  <ListItem>Title: {movieDetails.Title}</ListItem>
-                  <ListItem>Plot: {movieDetails.Plot}</ListItem>
-                  <ListItem>Director: {movieDetails.Director}</ListItem>
-                  <ListItem>Rated: {movieDetails.Rated}</ListItem>
-                  <ListItem>Released: {movieDetails.Year}</ListItem>
+                  <ListItem>Directed by {movieDetails.Director}</ListItem>
+                  <ListItem>{movieDetails.Plot}</ListItem>
                   <ListItem>Actors: {movieDetails.Actors}</ListItem>
                   <ListItem>Box Office: {movieDetails.BoxOffice}</ListItem>
                   <ListItem>Awards: {movieDetails.Awards}</ListItem>
-                  <ListItem>
-                    imdbRating: {movieDetails.imdbRating} / 10
-                  </ListItem>
                 </List>
               </Typography>
 
@@ -84,6 +79,9 @@ const MovieDetails = () => {
 
               <Typography variant="body2" component="div">
                 <List>
+                  <ListItem>
+                    imdbRating: {movieDetails.imdbRating} / 10
+                  </ListItem>
                   {movieDetails.Ratings.map((rating, index) => (
                     <ListItem key={index}>
                       {rating.Source}: {rating.Value}
@@ -103,6 +101,7 @@ const MovieDetails = () => {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              border: "2px solid grey",
               p: 2,
             }}
           >
