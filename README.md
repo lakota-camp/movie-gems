@@ -9,7 +9,7 @@ Welcome to **MovieGems**! A interactive movie watch list web app built to stream
 ## ⭐︎ Features
 
 - **Search & Discover**: Powered by the OMDB API, this app allows you to search through an extensive database of movies. From classics and indie films, to the latest blockbusters.
-- **Personal Watch list**: If you find a movie the intrigues you, add it to your watch list! Your movies are safely stored in MongoDB, ready to be viewed anytime.
+- **Personal Watch list**: If you find a movie that intrigues you, add it to your watch list! Your movies are safely stored in MongoDB, ready to be viewed anytime.
 - **Watched Movies**: Once you finish a movie, mark it as watched and it’ll move to a separate list, so you can keep track of your movie-watching goals.
 - **Dynamic Error Handling**: Errors are handled gracefully, whether it’s a missing movie poster or a network error, the app keeps running smoothly.
 - **CRUD Operations**: Create, Read, Update, and Delete—manage your watch list with ease. Add new movies, update their status to watched, or remove them entirely.
